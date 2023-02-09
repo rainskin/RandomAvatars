@@ -9,7 +9,9 @@ from core import dp
 @dp.command(commands.START)
 async def _(msg: types.Message, state: FSMContext):
     await state.finish()
-    await msg.answer(texts.welcome)
+
+    text = texts.welcome.format(mention=msg.from_user.get_mention())
+    await msg.answer(text)
 
     if lib.is_admin(msg.from_user):
         await commands.setup()
