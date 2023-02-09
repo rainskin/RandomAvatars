@@ -2,15 +2,15 @@
 name = "randomavatars"
 version = "0.1.0"
 description = ""
-authors = ["rainskin <homemadepunk@yandex.ru>"]
+authors = []
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-envparse = "^0.2.0"
 aiogram = "^2.23.1"
 pymongo = "^4.3.3"
-
+python-dotenv = "^0.21.1"
+mongoengine = "^0.26.0"
 
 [build-system]
 requires = ["poetry-core"]
