@@ -1,1 +1,5 @@
 START = 'start'
+GET_AVATARS = 'get_avatars'
+GET_PAIRED = 'get_paired'
+GET_CUTE = 'get_cute'
+GET_ANGRY = 'get_angry'
