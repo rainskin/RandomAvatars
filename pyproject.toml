@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "randomavatars"
+version = "0.1.0"
+description = ""
+authors = ["rainskin <homemadepunk@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+envparse = "^0.2.0"
+aiogram = "^2.23.1"
+pymongo = "^4.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
