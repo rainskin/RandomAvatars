@@ -3,6 +3,7 @@ from aiogram.utils.deep_linking import get_startgroup_link
 
 import config
 from assets import PictureCategory, texts, kbs
+from loader import db
 
 
 async def on_picture_request(update: types.Message | types.CallbackQuery, category: PictureCategory):
@@ -13,6 +14,7 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
         await answer_picture(msg, photo_ids)
         kb = kbs.PictureMenu().create()
         await msg.answer(texts.picture_menu_hint, reply_markup=kb)
+        db.save_picture_category(update.from_user.id, category)
     else:
         msg = update
         await answer_picture(msg, photo_ids)
