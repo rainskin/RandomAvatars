@@ -1,7 +1,8 @@
 from aiogram import types
+from aiogram.utils.deep_linking import get_startgroup_link
 
 import config
-from assets import PictureCategory, texts
+from assets import PictureCategory, texts, kbs
 
 
 async def on_picture_request(update: types.Message | types.CallbackQuery, category: PictureCategory):
@@ -10,7 +11,8 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
     if isinstance(update, types.CallbackQuery):
         msg = update.message
         await answer_picture(msg, photo_ids)
-        await msg.answer(texts.picture_menu_hint)
+        kb = kbs.PictureMenu().create()
+        await msg.answer(texts.picture_menu_hint, reply_markup=kb)
     else:
         msg = update
         await answer_picture(msg, photo_ids)
@@ -39,3 +41,10 @@ async def answer_picture(msg: types.Message, photo_ids: list[str]):
 
 def is_admin(user: types.User) -> bool:
     return user.id in config.ADMIN_IDS
+
+
+async def answer_main_menu(msg: types.Message):
+    text = texts.welcome.format(mention=msg.from_user.get_mention())
+    startgroup_url = await get_startgroup_link('0')
+    kb = kbs.MainMenu(startgroup_url).create()
+    await msg.answer(text, reply_markup=kb)

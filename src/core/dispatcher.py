@@ -12,7 +12,9 @@ class Dispatcher(aiogram.Dispatcher):
     def command(self, value: str):
         return self.message_handler(commands=value)
 
-    def click(self, button: CallbackButton):
+    def click(self, button: str | CallbackButton):
+        if isinstance(button, str):
+            return self.message_handler(text=button)
         return self.callback_query_handler(text=button.data)
 
     def text(self, value: str = None):

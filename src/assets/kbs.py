@@ -1,7 +1,7 @@
 # from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, \
 #     ReplyKeyboardMarkup
 
-from core.keyboards import InlineKeyboard, CallbackButton, UrlButton
+from core.keyboards import InlineKeyboard, CallbackButton, UrlButton, ReplyKeyboard
 
 
 # # Раздел загрузки контента
@@ -40,4 +40,15 @@ class MainMenu(InlineKeyboard):
             self.cute_pictures,
             self.angry_pictures,
             width=2,
+        )
+
+
+class PictureMenu(ReplyKeyboard):
+    get_another = '♻️ Хочу другую'
+    main_menu = '🔙 Меню'
+
+    def __init__(self):
+        self.add_row(
+            self.get_another,
+            self.main_menu,
         )
