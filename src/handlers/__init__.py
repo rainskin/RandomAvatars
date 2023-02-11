@@ -4,4 +4,5 @@ def setup():
     from . import get_paired
     from . import get_cute
     from . import get_angry
+    from . import send_picture
     from . import main_menu
