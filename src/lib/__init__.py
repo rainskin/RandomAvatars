@@ -4,9 +4,14 @@ import config
 from assets import PictureCategory
 
 
-async def answer_random_picture(msg: types.Message, category: PictureCategory):
+async def answer_random_picture(update: types.Message | types.CallbackQuery, category: PictureCategory):
     photo_ids = get_random_picture(category)
-    await answer_picture(msg, photo_ids)
+
+    if isinstance(update, types.CallbackQuery):
+        await update.answer()
+        await answer_picture(update.message, photo_ids)
+    else:
+        await answer_picture(update, photo_ids)
 
 
 def get_random_picture(category: PictureCategory) -> list[str]:
