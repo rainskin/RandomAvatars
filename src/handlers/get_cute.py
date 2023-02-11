@@ -7,4 +7,4 @@ from core import dp
 
 @dp.command(commands.GET_CUTE)
 async def _(msg: types.Message):
-    await lib.answer_random_picture(msg, PictureCategory.CUTE)
+    await lib.on_picture_request(msg, PictureCategory.CUTE)

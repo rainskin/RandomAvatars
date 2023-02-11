@@ -7,4 +7,4 @@ from core import dp
 
 @dp.command(commands.GET_ANGRY)
 async def _(msg: types.Message):
-    await lib.answer_random_picture(msg, PictureCategory.ANGRY)
+    await lib.on_picture_request(msg, PictureCategory.ANGRY)

@@ -1,24 +1,26 @@
 from aiogram import types
 
 import config
-from assets import PictureCategory
+from assets import PictureCategory, texts
 
 
-async def answer_random_picture(update: types.Message | types.CallbackQuery, category: PictureCategory):
+async def on_picture_request(update: types.Message | types.CallbackQuery, category: PictureCategory):
     photo_ids = get_random_picture(category)
 
     if isinstance(update, types.CallbackQuery):
-        await update.answer()
-        await answer_picture(update.message, photo_ids)
+        msg = update.message
+        await answer_picture(msg, photo_ids)
+        await msg.answer(texts.picture_menu_hint)
     else:
-        await answer_picture(update, photo_ids)
+        msg = update
+        await answer_picture(msg, photo_ids)
 
 
 def get_random_picture(category: PictureCategory) -> list[str]:
     match category:
         case PictureCategory.AVATAR:
             return ['https://telegra.ph/file/38155954f1b1e04a554f3.jpg']
-        case PictureCategory.PAIRED:
+        case PictureCategory.PAIRED_AVATARS:
             return ['https://telegra.ph/file/cdcca12410a6747e2fd5d.jpg',
                     'https://telegra.ph/file/711497c34cb1a6806d304.jpg']
         case PictureCategory.CUTE:

@@ -15,5 +15,8 @@ class Dispatcher(aiogram.Dispatcher):
     def click(self, button: CallbackButton):
         return self.callback_query_handler(text=button.data)
 
+    def text(self, value: str = None):
+        return self.message_handler(text=value)
+
 
 dp = Dispatcher(bot)

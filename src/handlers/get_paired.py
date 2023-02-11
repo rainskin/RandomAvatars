@@ -7,4 +7,4 @@ from core import dp
 
 @dp.command(commands.GET_PAIRED)
 async def _(msg: types.Message):
-    await lib.answer_random_picture(msg, PictureCategory.PAIRED)
+    await lib.on_picture_request(msg, PictureCategory.PAIRED_AVATARS)
