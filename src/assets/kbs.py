@@ -1,7 +1,7 @@
 # from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, \
 #     ReplyKeyboardMarkup
 
-from core.keyboards import InlineKeyboard, CallbackButton, UrlButton, ReplyKeyboard
+from core.keyboards import InlineKeyboard, CallbackButton, UrlButton, ReplyKeyboard, RemovedKeyboard
 
 
 # # Раздел загрузки контента
@@ -52,3 +52,6 @@ class PictureMenu(ReplyKeyboard):
             self.get_another,
             self.main_menu,
         )
+
+
+removed = RemovedKeyboard().create()

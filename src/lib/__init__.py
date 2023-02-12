@@ -48,13 +48,7 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
 
 def get_random_picture(category: PictureCategory) -> list[str]:
     pictures = db.get_pictures(category)
-
-    try:
-        picture = random.choice(pictures)
-    except IndexError as e:
-        logger.error(f'IndexError: {category=}, {pictures=}')
-        raise e
-
+    picture = random.choice(pictures)
     return picture.photo_ids
 
 
