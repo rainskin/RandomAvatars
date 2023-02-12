@@ -25,6 +25,8 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
     else:
         msg = update
 
+    db.save_chat(msg.chat)  # TODO
+
     remaining_cooldown = get_remaining_cooldown(user_doc)
 
     if msg.chat.type != 'private' and remaining_cooldown:

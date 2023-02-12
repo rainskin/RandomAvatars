@@ -20,6 +20,10 @@ class User(Document):
         self.save()
 
 
+class Chat(Document):
+    id: int = me.IntField(primary_key=True)
+
+
 class Picture(Document):
     category: str = me.StringField()
     photo_ids: list[str] = me.ListField(me.StringField())
@@ -43,3 +47,7 @@ class Database(BaseDatabase):
     @staticmethod
     def get_user(user_id: int) -> User:
         return User.find_doc(id=user_id) or User(id=user_id).save()
+
+    @staticmethod
+    def save_chat(chat_id: int):
+        Chat(id=chat_id).save()
