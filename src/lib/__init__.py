@@ -3,11 +3,12 @@ import time
 
 from aiogram import types
 from aiogram.utils.deep_linking import get_startgroup_link
+from aiogram.utils.exceptions import WrongFileIdentifier
 
 import config
 import database
 from assets import PictureCategory, texts, kbs
-from loader import db
+from loader import db, logger
 
 
 async def on_picture_request(update: types.Message | types.CallbackQuery, category: PictureCategory):
@@ -20,6 +21,7 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
         msg = update.message
         send_picture_menu = True
         user_doc.save_picture_category(category)
+        await update.answer()
     else:
         msg = update
 
@@ -29,7 +31,12 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
         await msg.answer(texts.wait_for.format(time=remaining_cooldown))
         return
 
-    await answer_picture(msg, photo_ids)
+    try:
+        await answer_picture(msg, photo_ids)
+    except WrongFileIdentifier:
+        logger.error(f'WrongFileIdentifier: {photo_ids}')
+        return
+
     user_doc.save_last_request_time(time.time())
 
     if send_picture_menu:
