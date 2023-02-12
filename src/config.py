@@ -6,3 +6,6 @@ class TextTriggers:
     PAIRED_AVATARS = ['авы', 'парные', 'аватарки']
     CUTE_PICTURE = ['милую']
     ANGRY_PICTURE = ['злую', 'агресивную', 'агрессивную']
+
+
+REQUEST_COOLDOWN = 15
