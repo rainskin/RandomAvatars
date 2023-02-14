@@ -3,7 +3,7 @@ import time
 
 from aiogram import types
 from aiogram.utils.deep_linking import get_startgroup_link
-from aiogram.utils.exceptions import WrongFileIdentifier
+from aiogram.utils.exceptions import WrongFileIdentifier, BadRequest
 
 import config
 import database
@@ -38,6 +38,11 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
     except WrongFileIdentifier:
         logger.error(f'WrongFileIdentifier: {photo_ids}')
         return
+    except BadRequest as e:
+        if e.args[0] == 'Not enough rights to send photos to the chat':
+            await msg.answer(texts.no_send_photo_rights)
+            return
+        raise e
 
     user_doc.save_last_request_time(time.time())
 
