@@ -44,7 +44,7 @@ class MainMenu(InlineKeyboard):
 
 
 class PictureMenu(ReplyKeyboard):
-    get_another = '♻️ Хочу другую'
+    get_another = '♻️ Ещё'
     main_menu = '🔙 Меню'
 
     def __init__(self):

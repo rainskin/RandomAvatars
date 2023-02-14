@@ -79,3 +79,7 @@ async def answer_main_menu(msg: types.Message):
 def get_remaining_cooldown(user: database.User) -> int:
     delta = int(time.time() - user.last_request_time)
     return max(0, config.REQUEST_COOLDOWN - delta)
+
+
+async def ask_to_restart_bot(msg: types.Message):
+    await msg.answer('Пожалуйста, перезапусти бота с помощью /start', reply_markup=kbs.removed)

@@ -16,3 +16,8 @@ async def _(msg: types.Message):
         return
 
     await lib.on_picture_request(msg, picture_category)
+
+
+@dp.text('♻️ Хочу другую')
+async def _(msg: types.Message):
+    await lib.ask_to_restart_bot(msg)
