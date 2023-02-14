@@ -11,8 +11,7 @@ async def _(msg: types.Message):
     picture_category = db.get_user(msg.from_user.id).picture_category
 
     if not picture_category:
-        await msg.answer('Пожалуйста, выбери категорию заново', reply_markup=kbs.removed)
-        await lib.answer_main_menu(msg)
+        await lib.ask_to_restart_bot()
         return
 
     await lib.on_picture_request(msg, picture_category)

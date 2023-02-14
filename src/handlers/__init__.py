@@ -8,3 +8,4 @@ def setup():
     from . import main_menu
     from . import picture_menu
     from . import text
+    from . import errors
