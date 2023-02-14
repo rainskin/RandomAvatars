@@ -42,6 +42,8 @@ async def on_picture_request(update: types.Message | types.CallbackQuery, catego
         if e.args[0] == 'Not enough rights to send photos to the chat':
             await msg.answer(texts.no_send_photo_rights)
             return
+        elif e.args[0] == 'Not enough rights to send text messages to the chat':
+            return
         raise e
 
     user_doc.save_last_request_time(time.time())
