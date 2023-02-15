@@ -1,10 +1,8 @@
-from aiogram import executor, types
-from aiogram.dispatcher import FSMContext
+from aiogram import executor
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
 import handlers
-from assets import texts, kbs
-from core import bot, dp
+from core import dp
 
 
 class States(StatesGroup):
