@@ -25,17 +25,19 @@ class PictureRequest:
         else:
             self._message = request
 
-        self._remaining_cooldown = self._get_remaining_cooldown()
         self._picture = _get_random_picture(category)
         db.save_chat(self._message.chat)
 
     def respond(self):
-        if self._remaining_cooldown:
-            return self._ask_wait()
+        cooldown = self._get_remaining_cooldown()
+
+        if cooldown:
+            return self._ask_wait(cooldown)
+
         return self._try_answer()
 
-    def _ask_wait(self):
-        text = texts.wait_for.format(time=self._remaining_cooldown)
+    def _ask_wait(self, remaining_cooldown: int):
+        text = texts.wait_for.format(time=remaining_cooldown)
         return self._message.answer(text, reply=True)
 
     async def _try_answer(self):
@@ -67,12 +69,6 @@ class PictureRequest:
 
         delta = int(time.time() - self._user.last_request_time)
         return max(0, config.REQUEST_COOLDOWN - delta)
-
-
-def _get_request_message(request: Request) -> types.Message:
-    if isinstance(request, types.CallbackQuery):
-        return request.message
-    return request
 
 
 def _get_random_picture(category: PictureCategory) -> models.Picture:
