@@ -1,1 +1,5 @@
-Use `. run.sh` and `. stop.sh`
+# Control:
+
+- `. scripts/run.sh`
+- `. scripts/logs.sh`
+- `. scripts/stop.sh`
