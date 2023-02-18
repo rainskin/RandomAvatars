@@ -7,7 +7,7 @@ from assets import commands, texts
 from core import dp
 
 
-@dp.command(commands.START)
+@dp.command(commands.START, state='*')
 async def _(msg: types.Message, state: FSMContext):
     await state.finish()
 

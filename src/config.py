@@ -1,4 +1,4 @@
-ADMIN_IDS = [724477101]
+ADMIN_IDS = [724477101, 936845322]
 
 
 class TextTriggers:

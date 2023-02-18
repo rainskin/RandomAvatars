@@ -18,6 +18,10 @@ class Database(BaseDatabase):
     def save_chat(chat_id: int):
         Chat(id=chat_id).save()
 
+    @staticmethod
+    def get_chats() -> list[Chat]:
+        return Chat().find_docs()
+
     def get_pictures(self, category: PictureCategory) -> list[Picture]:
         if not self.pictures_by_category:
             self._load_pictures()

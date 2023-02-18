@@ -35,3 +35,13 @@ no_send_photo_rights = """
 """
 
 ask_restart = 'Пожалуйста, перезапусти бота с помощью /start'
+
+ask_broadcast_post = 'Жду пост, давай только без альбомов'
+
+broadcast_summary = """
+<b>Рассылка окончена</b>
+
+Сообщений доставлено: {delivered_count} штуков
+Ошибка флуда возникала: {floods_count} раз(а)
+Другие ошибки: {errors_count} штуков
+"""

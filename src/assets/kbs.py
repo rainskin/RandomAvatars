@@ -33,3 +33,23 @@ class PictureMenu(ReplyKeyboard):
 
 
 removed = RemovedKeyboard().create()
+
+
+class AdminPanel(InlineKeyboard):
+    broadcast = CallbackButton('📩 Рассылка')
+
+    def __init__(self):
+        self.add_row(self.broadcast)
+
+
+admin_panel = AdminPanel().create()
+
+
+class Cancel(InlineKeyboard):
+    button = CallbackButton('Отменить')
+
+    def __init__(self):
+        self.add_row(self.button)
+
+
+cancel = Cancel().create()

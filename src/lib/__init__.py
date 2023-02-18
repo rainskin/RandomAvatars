@@ -1,8 +1,12 @@
+import asyncio
+
 from aiogram import types
 from aiogram.utils.deep_linking import get_startgroup_link
+from aiogram.utils.exceptions import TelegramAPIError, RetryAfter
 
 import config
 from assets import PictureCategory, texts, kbs
+from loader import db
 from .picture_request import PictureRequest, Request
 
 
@@ -41,3 +45,34 @@ TRIGGERS_TO_CATEGORY = [
     (config.TextTriggers.CUTE_PICTURE, PictureCategory.CUTE),
     (config.TextTriggers.ANGRY_PICTURE, PictureCategory.ANGRY),
 ]
+
+
+def schedule_broadcast(post: types.Message):
+    loop = asyncio.get_running_loop()
+    loop.create_task(_broadcast(post))
+
+
+async def _broadcast(post: types.Message):
+    delivered_count = 0
+    floods_count = 0
+    errors_count = 0
+
+    for chat in db.get_chats():
+        try:
+            await post.copy_to(chat.id)
+        except RetryAfter as e:
+            floods_count += 1
+            await asyncio.sleep(e.timeout)
+        except TelegramAPIError:
+            errors_count += 1
+        else:
+            delivered_count += 1
+        finally:
+            await asyncio.sleep(0.1)
+
+    text = texts.broadcast_summary.format(
+        delivered_count=delivered_count,
+        floods_count=floods_count,
+        errors_count=errors_count,
+    )
+    await post.answer(text)
