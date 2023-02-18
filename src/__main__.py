@@ -1,3 +1,3 @@
 from core import app
 
-app.run()
+app.run(skip_updates=True)
