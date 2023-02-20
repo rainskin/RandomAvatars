@@ -14,4 +14,4 @@ def get_picture(category: PictureCategory) -> list[str]:
     return picture.photo_ids
 
 
-uvicorn.run(app)
+uvicorn.run(app, log_level=30)
