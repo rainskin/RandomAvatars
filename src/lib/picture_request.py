@@ -75,8 +75,3 @@ async def _get_random_picture(category: PictureCategory) -> list[str]:
     base_url = 'http://localhost:8000'
     resp = await client.get(f'{base_url}/picture/{category}')
     return resp.json()
-
-# async def _get_random_picture(category: PictureCategory) -> list[str]:
-#     pictures = db.get_pictures(category)
-#     picture: models.Picture = random.choice(pictures)
-#     return picture.photo_ids

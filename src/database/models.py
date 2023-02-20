@@ -20,8 +20,3 @@ class User(Document):
 
 class Chat(Document):
     id: int = me.IntField(primary_key=True)
-
-
-class Picture(Document):
-    category: str = me.StringField()
-    photo_ids: list[str] = me.ListField(me.StringField())
