@@ -8,9 +8,10 @@ from loader import db, app
 
 
 @app.get('/picture/{category}')
-def get_picture(category: PictureCategory) -> list[str]:
-    pictures = db.get_pictures(category)
+def get_picture(category: PictureCategory, chat_id: int) -> list[str]:
+    pictures = db.get_pictures(category, chat_id)
     picture: models.Picture = random.choice(pictures)
+    db.save_sent_picture(chat_id, picture)
     return picture.photo_ids
 
 

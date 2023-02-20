@@ -32,7 +32,7 @@ class PictureRequest:
         if cooldown:
             await self._ask_wait(cooldown)
         else:
-            self._picture = await api.get_picture(self._category)
+            self._picture = await api.get_picture(self._category, self._message.chat.id)
             await self._try_answer()
 
     def _ask_wait(self, remaining_cooldown: int):

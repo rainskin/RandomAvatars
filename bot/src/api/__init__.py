@@ -8,12 +8,13 @@ class Api:
         self._base_url = base_url
         self._client = httpx.AsyncClient()
 
-    async def _get(self, endpoint: str) -> dict | list:
+    async def _get(self, endpoint: str, params: dict = None) -> dict | list:
         url = self._base_url + endpoint
-        resp = await self._client.get(url)
+        resp = await self._client.get(url, params=params)
         return resp.json()
 
-    async def get_picture(self, category: PictureCategory) -> list[str]:
+    async def get_picture(self, category: PictureCategory, chat_id: int) -> list[str]:
         endpoint = f'/picture/{category}'
-        result = await self._get(endpoint)
+        params = {'chat_id': chat_id}
+        result = await self._get(endpoint, params)
         return result

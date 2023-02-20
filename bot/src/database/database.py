@@ -10,7 +10,7 @@ class Database(BaseDatabase):
 
     @staticmethod
     def save_chat(chat_id: int):
-        Chat(id=chat_id).save()
+        Chat.find_doc(id=chat_id) or Chat(id=chat_id).save()
 
     @staticmethod
     def get_chats() -> list[Chat]:

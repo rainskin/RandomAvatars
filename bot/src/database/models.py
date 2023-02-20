@@ -1,4 +1,5 @@
 import mongoengine as me
+from bson import ObjectId
 
 from assets import PictureCategory
 from core import Document
@@ -20,3 +21,6 @@ class User(Document):
 
 class Chat(Document):
     id: int = me.IntField(primary_key=True)
+    sent_picture_ids: list[ObjectId] = me.ListField(me.ObjectIdField())
+
+
