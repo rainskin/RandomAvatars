@@ -2,7 +2,7 @@ from collections import defaultdict
 
 from core import BaseDatabase
 from enums import PictureCategory
-from .models import Picture, Chat
+from .models import Picture, Chat, User
 
 
 class Database(BaseDatabase):
@@ -14,6 +14,10 @@ class Database(BaseDatabase):
     def save_sent_picture(chat_id: int, picture: Picture):
         chat = Chat.get(chat_id)
         chat.save_sent_picture(picture)
+
+    @staticmethod
+    def get_user(user_id: int) -> User:
+        return User.get(user_id)
 
     def get_pictures(self, category: PictureCategory, chat_id: int) -> list[Picture]:
         if not self.pictures_by_category:
@@ -30,8 +34,7 @@ class Database(BaseDatabase):
         new_pictures = [i for i in pictures if i.id not in set(chat.sent_picture_ids)]
 
         if not new_pictures:
-            last_sent_picture_id = chat.sent_picture_ids[-1]
-            new_pictures = [i for i in pictures if i.id != last_sent_picture_id]
+            new_pictures = pictures
             chat.reset_sent_pictures()
 
         return new_pictures

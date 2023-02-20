@@ -26,3 +26,17 @@ class Chat(Document):
     def save_sent_picture(self, picture: Picture):
         self.sent_picture_ids.append(picture.id)
         self.save()
+
+
+class User(Document):
+    id: int = me.IntField(primary_key=True)
+    picture_category: str = me.StringField()
+    last_request_time: int = me.IntField(default=0)
+
+    @classmethod
+    def get(cls, user_id: int) -> User:
+        return cls.find_doc(id=user_id) or cls(id=user_id).save()
+
+    def save_last_request_time(self, value: int):
+        self.last_request_time = value
+        self.save()
