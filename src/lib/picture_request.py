@@ -1,4 +1,3 @@
-import random
 import time
 
 from aiogram import types
@@ -7,13 +6,14 @@ from aiogram.utils.exceptions import WrongFileIdentifier
 
 import config
 from assets import PictureCategory, texts, kbs
-from database import models
-from loader import db, logger
+from loader import db, logger, client
 
 Request = types.Message | types.CallbackQuery
 
 
 class PictureRequest:
+    _picture: list[str] = None
+
     def __init__(self, request: Request, category: PictureCategory):
         self._require_keyboard = False
         self._user = db.get_user(request.from_user.id)
@@ -25,16 +25,16 @@ class PictureRequest:
         else:
             self._message = request
 
-        self._picture = _get_random_picture(category)
         db.save_chat(self._message.chat)
 
-    def respond(self):
+    async def respond(self):
         cooldown = self._get_remaining_cooldown()
 
         if cooldown:
-            return self._ask_wait(cooldown)
-
-        return self._try_answer()
+            await self._ask_wait(cooldown)
+        else:
+            self._picture = await _get_random_picture(self._category)
+            await self._try_answer()
 
     def _ask_wait(self, remaining_cooldown: int):
         text = texts.wait_for.format(time=remaining_cooldown)
@@ -44,7 +44,7 @@ class PictureRequest:
         try:
             await self._answer()
         except WrongFileIdentifier:
-            logger.error(f'WrongFileIdentifier: {self._picture.photo_ids}')
+            logger.error(f'WrongFileIdentifier: {self._picture}')
             return
 
         self._user.save_last_request_time(time.time())
@@ -55,7 +55,7 @@ class PictureRequest:
             await self._message.answer(texts.picture_menu_hint, reply_markup=kb)
 
     async def _answer(self):
-        photo_ids = self._picture.photo_ids
+        photo_ids = self._picture
 
         if len(photo_ids) > 1:
             media = [types.InputMediaPhoto(i) for i in photo_ids]
@@ -71,6 +71,12 @@ class PictureRequest:
         return max(0, config.REQUEST_COOLDOWN - delta)
 
 
-def _get_random_picture(category: PictureCategory) -> models.Picture:
-    pictures = db.get_pictures(category)
-    return random.choice(pictures)
+async def _get_random_picture(category: PictureCategory) -> list[str]:
+    base_url = 'http://localhost:8000'
+    resp = await client.get(f'{base_url}/picture/{category}')
+    return resp.json()
+
+# async def _get_random_picture(category: PictureCategory) -> list[str]:
+#     pictures = db.get_pictures(category)
+#     picture: models.Picture = random.choice(pictures)
+#     return picture.photo_ids
