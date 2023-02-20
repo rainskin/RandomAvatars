@@ -1,5 +1,5 @@
 services:
-  app:
+  bot:
     build: bot
     restart: always
     env_file: .env
