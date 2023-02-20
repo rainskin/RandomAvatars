@@ -1,10 +1,9 @@
 import time
 
+import config
 from aiogram import types
 from aiogram.types import ChatType
 from aiogram.utils.exceptions import WrongFileIdentifier
-
-import config
 from assets import PictureCategory, texts, kbs
 from loader import db, logger, client
 
@@ -72,6 +71,6 @@ class PictureRequest:
 
 
 async def _get_random_picture(category: PictureCategory) -> list[str]:
-    base_url = 'http://localhost:8000'
+    base_url = f'http://{config.API_HOST}:8000'
     resp = await client.get(f'{base_url}/picture/{category}')
     return resp.json()

@@ -1,4 +1,8 @@
+from core import env
+
 ADMIN_IDS = [724477101, 936845322]
+
+API_HOST = env.get('API_HOST')
 
 
 class TextTriggers:
