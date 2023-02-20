@@ -13,7 +13,6 @@ python-dotenv = "^0.21.1"
 mongoengine = "^0.26.0"
 httpx = "^0.23.3"
 fastapi = "^0.92.0"
-uvicorn = "^0.20.0"
 
 [build-system]
 requires = ["poetry-core"]
