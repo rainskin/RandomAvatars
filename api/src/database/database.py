@@ -11,6 +11,14 @@ class Database(BaseDatabase):
         self.pictures_by_category: dict[str, list[Picture]] = defaultdict(list)
 
     @staticmethod
+    def get_chats() -> list[Chat]:
+        return Chat().find_docs()
+
+    @staticmethod
+    def save_chat(chat_id: int):
+        Chat.find_doc(id=chat_id) or Chat(id=chat_id).save()
+
+    @staticmethod
     def save_sent_picture(chat_id: int, picture: Picture):
         chat = Chat.get(chat_id)
         chat.save_sent_picture(picture)

@@ -2,19 +2,10 @@ import random
 import time
 
 import config
+from core import make_response, OK
 from database import models
-from database.models import Chat
 from enums import PictureCategory, ChatType
 from loader import db, app
-
-JSON = list | str | int | bool
-
-
-def make_response(result: JSON) -> dict:
-    return {'result': result}
-
-
-OK = make_response(True)
 
 
 @app.get('/picture/{category}')
@@ -30,7 +21,7 @@ def get_cooldown(user_id: int, chat_type: ChatType):
     user = db.get_user(user_id)
 
     delta = int(time.time() - user.last_request_time)
-    remaining_time = max(0, config.REQUEST_COOLDOWN - delta)
+    remaining_time = max(0, config.PICTURE_REQUEST_COOLDOWN - delta)
 
     if chat_type == ChatType.PRIVATE:
         remaining_time = 0
@@ -60,11 +51,11 @@ async def set_picture_category(user_id: int, category: PictureCategory):
 
 @app.get('/chats')
 async def get_chats():
-    chat_ids = [c.id for c in Chat().find_docs()]
+    chat_ids = [c.id for c in db.get_chats()]
     return make_response(chat_ids)
 
 
 @app.post('/chats/{chat_id}')
 async def save_chat(chat_id: int):
-    Chat.find_doc(id=chat_id) or Chat(id=chat_id).save()
+    db.save_chat(chat_id)
     return OK
