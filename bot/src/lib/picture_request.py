@@ -1,7 +1,7 @@
 from aiogram import types
 
 from assets import PictureCategory, texts, kbs
-from loader import db, api
+from loader import api
 
 Request = types.Message | types.CallbackQuery
 
@@ -21,7 +21,6 @@ class PictureRequest:
             self._message = request
 
         self._chat = self._message.chat
-        db.save_chat(self._message.chat.id)
 
     async def respond(self):
         cooldown = await api.get_cooldown(self._user_id, self._chat.type)
@@ -29,24 +28,25 @@ class PictureRequest:
         if cooldown:
             await self._ask_wait(cooldown)
         else:
-            self._picture = await api.get_picture(self._category, self._chat.id)
-            await self._try_answer()
+            self._picture = await api.get_picture(self._chat.id, self._category)
+            await self._answer()
 
-    def _ask_wait(self, remaining_cooldown: int):
-        text = texts.wait_for.format(time=remaining_cooldown)
+        await api.save_chat(self._chat.id)
+
+    def _ask_wait(self, cooldown: int):
+        text = texts.wait_for.format(time=cooldown)
         return self._message.answer(text, reply=True)
 
-    async def _try_answer(self):
-        await self._answer()
-
+    async def _answer(self):
+        await self._send_picture()
         await api.set_cooldown(self._user_id)
 
         if self._require_keyboard:
             kb = kbs.PictureMenu().create()
             await self._message.answer(texts.picture_menu_hint, reply_markup=kb)
-            await api.set_picture_category(self._category, self._user_id)
+            await api.set_picture_category(self._user_id, self._category)
 
-    async def _answer(self):
+    async def _send_picture(self):
         photo_ids = self._picture
 
         if len(photo_ids) > 1:

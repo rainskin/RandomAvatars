@@ -1,54 +1,43 @@
-import httpx
-
 from assets import PictureCategory
+from core import BaseApi
 
-JSON = dict | list | int | bool
 
+class Api(BaseApi):
 
-class Api:
-    def __init__(self, base_url: str):
-        self._base_url = base_url
-        self._client = httpx.AsyncClient()
+    def get_picture(self, chat_id: int, category: PictureCategory) -> list[str]:
+        return self._get(
+            endpoint=f'/picture/{category}',
+            params={'chat_id': chat_id},
+        )
 
-    async def _get(self, endpoint: str, params: dict = None) -> JSON:
-        url = self._base_url + endpoint
-        resp = await self._client.get(url, params=params)
-        return resp.json()
+    def get_cooldown(self, user_id: int, chat_type: str) -> int:
+        return self._get(
+            endpoint=f'/cooldown/{user_id}',
+            params={'chat_type': chat_type},
+        )
 
-    async def _set(self, endpoint: str, params: dict = None) -> JSON:
-        url = self._base_url + endpoint
-        resp = await self._client.post(url, params=params)
-        return resp.json()
+    def set_cooldown(self, user_id: int) -> bool:
+        return self._set(
+            endpoint=f'/cooldown/{user_id}',
+        )
 
-    async def get_picture(self, category: PictureCategory, chat_id: int) -> list[str]:
-        endpoint = f'/picture/{category}'
-        params = {'chat_id': chat_id}
-        result = await self._get(endpoint, params)
-        return result
+    def get_picture_category(self, user_id: int) -> str:
+        return self._get(
+            endpoint=f'/picture-category/{user_id}',
+        )
 
-    async def get_cooldown(self, user_id: int, chat_type: str) -> int:
-        endpoint = f'/cooldown/{user_id}'
-        params = {'chat_type': chat_type}
-        result = await self._get(endpoint, params)
-        return result['remaining_time']
+    def set_picture_category(self, user_id: int, category: PictureCategory) -> bool:
+        return self._set(
+            endpoint=f'/picture-category/{user_id}',
+            params={'category': category},
+        )
 
-    async def set_cooldown(self, user_id: int) -> bool:
-        endpoint = f'/cooldown/{user_id}'
-        result = await self._set(endpoint)
-        return result['ok']
+    def get_chats(self) -> list[int]:
+        return self._get(
+            endpoint=f'/chats',
+        )
 
-    async def get_picture_category(self, user_id: int) -> PictureCategory:
-        endpoint = f'/picture-category/{user_id}'
-        result = await self._get(endpoint)
-        return result['category']
-
-    async def set_picture_category(self, category: PictureCategory, user_id: int) -> bool:
-        endpoint = f'/picture-category/{user_id}'
-        params = {'category': category}
-        result = await self._set(endpoint, params)
-        return result['ok']
-
-    async def get_chats(self) -> list[int]:
-        endpoint = f'/chats'
-        result = await self._get(endpoint)
-        return result
+    def save_chat(self, chat_id: int) -> bool:
+        return self._set(
+            endpoint=f'/chats/{chat_id}',
+        )

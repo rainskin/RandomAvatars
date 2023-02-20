@@ -5,7 +5,7 @@ from aiogram.types import ChatType
 import lib
 from assets import commands, texts
 from core import dp
-from loader import db
+from loader import api
 
 
 @dp.command(commands.START, state='*')
@@ -20,4 +20,4 @@ async def _(msg: types.Message, state: FSMContext):
     if lib.is_admin(msg.from_user):
         await commands.setup()
 
-    db.save_chat(msg.chat.id)
+    await api.save_chat(msg.chat.id)

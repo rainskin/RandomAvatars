@@ -1,3 +1,4 @@
+from .api import BaseApi
 from .app import app
 from .bot import bot
 from .database import BaseDatabase
