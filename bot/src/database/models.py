@@ -14,13 +14,7 @@ class User(Document):
         self.picture_category = picture_category
         self.save()
 
-    def save_last_request_time(self, request_time: int):
-        self.last_request_time = request_time
-        self.save()
-
 
 class Chat(Document):
     id: int = me.IntField(primary_key=True)
     sent_picture_ids: list[ObjectId] = me.ListField(me.ObjectIdField())
-
-
