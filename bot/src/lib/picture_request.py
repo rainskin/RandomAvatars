@@ -1,11 +1,12 @@
 import time
 
-import config
 from aiogram import types
 from aiogram.types import ChatType
 from aiogram.utils.exceptions import WrongFileIdentifier
+
+import config
 from assets import PictureCategory, texts, kbs
-from loader import db, logger, client
+from loader import db, logger, api
 
 Request = types.Message | types.CallbackQuery
 
@@ -32,7 +33,7 @@ class PictureRequest:
         if cooldown:
             await self._ask_wait(cooldown)
         else:
-            self._picture = await _get_random_picture(self._category)
+            self._picture = await api.get_picture(self._category)
             await self._try_answer()
 
     def _ask_wait(self, remaining_cooldown: int):
@@ -68,9 +69,3 @@ class PictureRequest:
 
         delta = int(time.time() - self._user.last_request_time)
         return max(0, config.REQUEST_COOLDOWN - delta)
-
-
-async def _get_random_picture(category: PictureCategory) -> list[str]:
-    base_url = f'http://{config.API_HOST}:8000'
-    resp = await client.get(f'{base_url}/picture/{category}')
-    return resp.json()
