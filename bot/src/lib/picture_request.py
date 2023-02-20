@@ -2,11 +2,10 @@ import time
 
 from aiogram import types
 from aiogram.types import ChatType
-from aiogram.utils.exceptions import WrongFileIdentifier
 
 import config
 from assets import PictureCategory, texts, kbs
-from loader import db, logger, api
+from loader import db, api
 
 Request = types.Message | types.CallbackQuery
 
@@ -41,11 +40,7 @@ class PictureRequest:
         return self._message.answer(text, reply=True)
 
     async def _try_answer(self):
-        try:
-            await self._answer()
-        except WrongFileIdentifier:
-            logger.error(f'WrongFileIdentifier: {self._picture}')
-            return
+        await self._answer()
 
         self._user.save_last_request_time(time.time())
 
