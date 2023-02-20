@@ -5,6 +5,4 @@ services:
   api:
     build: api
     restart: always
-    network_mode: host
     env_file: .env
-
