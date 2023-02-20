@@ -3,7 +3,7 @@ services:
     build: .
     restart: always
   api:
-    build: .
+    build: api
     restart: always
     network_mode: host
 

@@ -5,4 +5,4 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install
 COPY . .
 ENV TZ="Europe/Moscow"
-CMD poetry run python api & poetry run python bot
+CMD poetry run python bot
