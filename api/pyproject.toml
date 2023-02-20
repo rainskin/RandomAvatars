@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "api"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.20.0"
+fastapi = "^0.92.0"
+python-dotenv = "^0.21.1"
+mongoengine = "^0.26.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
