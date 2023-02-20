@@ -4,7 +4,7 @@ from aiogram import types
 from aiogram.utils.exceptions import RetryAfter, TelegramAPIError
 
 from assets import texts
-from loader import db
+from loader import api
 
 
 class Broadcast:
@@ -20,8 +20,10 @@ class Broadcast:
         self._loop.create_task(self._broadcast())
 
     async def _broadcast(self):
-        for chat in db.get_chats():
-            await self._try_copy_post(chat.id)
+        chat_ids = await api.get_chats()
+
+        for i in chat_ids:
+            await self._try_copy_post(i)
 
         await self._send_summary()
 

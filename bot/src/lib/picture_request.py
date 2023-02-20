@@ -12,7 +12,6 @@ class PictureRequest:
     def __init__(self, request: Request, category: PictureCategory):
         self._require_keyboard = False
         self._user_id = request.from_user.id
-        self._user = db.get_user(self._user_id)
         self._category = category
 
         if isinstance(request, types.CallbackQuery):
@@ -22,7 +21,7 @@ class PictureRequest:
             self._message = request
 
         self._chat = self._message.chat
-        db.save_chat(self._message.chat)
+        db.save_chat(self._message.chat.id)
 
     async def respond(self):
         cooldown = await api.get_cooldown(self._user_id, self._chat.type)
@@ -43,9 +42,9 @@ class PictureRequest:
         await api.set_cooldown(self._user_id)
 
         if self._require_keyboard:
-            self._user.save_picture_category(self._category)
             kb = kbs.PictureMenu().create()
             await self._message.answer(texts.picture_menu_hint, reply_markup=kb)
+            await api.set_picture_category(self._category, self._user_id)
 
     async def _answer(self):
         photo_ids = self._picture

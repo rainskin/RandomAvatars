@@ -36,3 +36,19 @@ class Api:
         endpoint = f'/cooldown/{user_id}'
         result = await self._set(endpoint)
         return result['ok']
+
+    async def get_picture_category(self, user_id: int) -> PictureCategory:
+        endpoint = f'/picture-category/{user_id}'
+        result = await self._get(endpoint)
+        return result['category']
+
+    async def set_picture_category(self, category: PictureCategory, user_id: int) -> bool:
+        endpoint = f'/picture-category/{user_id}'
+        params = {'category': category}
+        result = await self._set(endpoint, params)
+        return result['ok']
+
+    async def get_chats(self) -> list[int]:
+        endpoint = f'/chats'
+        result = await self._get(endpoint)
+        return result

@@ -4,6 +4,7 @@ import mongoengine as me
 from bson import ObjectId
 
 from core import Document
+from enums import PictureCategory
 
 
 class Picture(Document):
@@ -39,4 +40,8 @@ class User(Document):
 
     def save_last_request_time(self, value: int):
         self.last_request_time = value
+        self.save()
+
+    def save_picture_category(self, value: PictureCategory):
+        self.picture_category = value
         self.save()

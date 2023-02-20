@@ -1,7 +1,7 @@
-from enum import Enum
+from core import StrEnum
 
 
-class PictureCategory(str, Enum):
+class PictureCategory(StrEnum):
     AVATAR = 'avatar'
     PAIRED_AVATARS = 'paired_avatars'
     CUTE = 'cute'
