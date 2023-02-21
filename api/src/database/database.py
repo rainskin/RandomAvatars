@@ -2,7 +2,7 @@ from collections import defaultdict
 
 from core import BaseDatabase
 from enums import PictureCategory
-from .models import Picture, Chat, User
+from .models import Picture, Chat, User, Setting
 
 
 class Database(BaseDatabase):
@@ -46,3 +46,13 @@ class Database(BaseDatabase):
             chat.reset_sent_pictures()
 
         return new_pictures
+
+    @staticmethod
+    def set_required_join_chat(chat_id: int):
+        setting = Setting.get(Setting.REQUIRED_JOIN_CHAT)
+        setting.set_value(chat_id)
+
+    @staticmethod
+    def get_required_join_chat() -> int:
+        setting = Setting.get(Setting.REQUIRED_JOIN_CHAT)
+        return setting.value

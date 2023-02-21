@@ -45,3 +45,21 @@ class User(Document):
     def save_picture_category(self, value: PictureCategory):
         self.picture_category = value
         self.save()
+
+
+SettingValue = int | None
+
+
+class Setting(Document):
+    REQUIRED_JOIN_CHAT = 'REQUIRED_JOIN_CHAT'
+
+    id: str = me.StringField(primary_key=True)
+    value: SettingValue = me.DynamicField()
+
+    @classmethod
+    def get(cls, _id: int):
+        return cls.find_doc(id=_id) or cls(id=_id).save()
+
+    def set_value(self, value: SettingValue):
+        self.value = value
+        self.save()

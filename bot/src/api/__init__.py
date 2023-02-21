@@ -1,8 +1,13 @@
 from assets import PictureCategory
 from core import BaseApi
+from .required_join import RequiredJoin
 
 
 class Api(BaseApi):
+
+    def __init__(self, base_url: str):
+        super().__init__(base_url)
+        self.required_join = RequiredJoin(self._base_url + '/required-join')
 
     def get_picture(self, chat_id: int, category: PictureCategory) -> list[str]:
         return self._get(

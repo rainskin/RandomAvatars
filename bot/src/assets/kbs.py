@@ -1,5 +1,7 @@
 from core.keyboards import InlineKeyboard, CallbackButton, UrlButton, ReplyKeyboard, RemovedKeyboard
 
+ADMIN_BACK_BUTTON = CallbackButton('🔙 Назад')
+
 
 class MainMenu(InlineKeyboard):
     add_to_chat = UrlButton('💬 Добавить в чат', '{startgroup_url}')
@@ -32,24 +34,37 @@ class PictureMenu(ReplyKeyboard):
         )
 
 
-removed = RemovedKeyboard().create()
-
-
 class AdminPanel(InlineKeyboard):
     broadcast = CallbackButton('📩 Рассылка')
+    required_join = CallbackButton('✅ Обязательная подписка')
 
     def __init__(self):
-        self.add_row(self.broadcast)
+        self.add_rows(
+            self.broadcast,
+            self.required_join,
+        )
 
 
+class AdminCancel(InlineKeyboard):
+
+    def __init__(self):
+        self.add_row(ADMIN_BACK_BUTTON)
+
+
+class RequiredJoin(InlineKeyboard):
+    select_channel = CallbackButton('Выбрать канал')
+    disable = CallbackButton('Отключить')
+
+    def __init__(self):
+        self.add_rows(
+            self.select_channel,
+            self.disable,
+            ADMIN_BACK_BUTTON,
+        )
+
+
+removed = RemovedKeyboard().create()
+admin_cancel = AdminCancel().create()
+picture_menu = PictureMenu().create()
 admin_panel = AdminPanel().create()
-
-
-class Cancel(InlineKeyboard):
-    button = CallbackButton('Отменить')
-
-    def __init__(self):
-        self.add_row(self.button)
-
-
-cancel = Cancel().create()
+required_join = RequiredJoin().create()

@@ -8,4 +8,4 @@ from core import dp
 async def _(query: types.CallbackQuery):
     await query.answer()
     await States.broadcast.set()
-    await query.message.edit_text(texts.ask_broadcast_post, reply_markup=kbs.cancel)
+    await query.message.edit_text(texts.ask_broadcast_post, reply_markup=kbs.admin_cancel)

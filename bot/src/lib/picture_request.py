@@ -42,8 +42,7 @@ class PictureRequest:
         await api.set_cooldown(self._user_id)
 
         if self._require_keyboard:
-            kb = kbs.PictureMenu().create()
-            await self._message.answer(texts.picture_menu_hint, reply_markup=kb)
+            await self._message.answer(texts.picture_menu_hint, reply_markup=kbs.picture_menu)
             await api.set_picture_category(self._user_id, self._category)
 
     async def _send_picture(self):

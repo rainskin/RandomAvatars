@@ -1,6 +1,8 @@
 import random
 import time
 
+from pydantic import BaseModel
+
 import config
 from core import make_response, OK
 from database import models
@@ -58,4 +60,20 @@ async def get_chats():
 @app.post('/chats/{chat_id}')
 async def save_chat(chat_id: int):
     db.save_chat(chat_id)
+    return OK
+
+
+@app.get('/required-join/chat')
+async def get_required_join_chat():
+    chat = db.get_required_join_chat()
+    return make_response(chat)
+
+
+class RequiredJoinChat(BaseModel):
+    chat_id: int | None
+
+
+@app.post('/required-join/chat')
+async def set_required_join_chat(chat: RequiredJoinChat):
+    db.set_required_join_chat(chat.chat_id)
     return OK

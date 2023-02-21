@@ -11,12 +11,20 @@ class BaseApi:
     def _get(self, endpoint: str, params: dict = None):
         return self._request('GET', endpoint, params)
 
-    def _set(self, endpoint: str, params: dict = None):
-        return self._request('POST', endpoint, params)
+    def _set(self, endpoint: str, params: dict = None, json: dict = None):
+        return self._request('POST', endpoint, params, json)
 
-    async def _request(self, method: str, endpoint: str, params: dict = None) -> RESULT:
+    def _delete(self, endpoint: str, params: dict = None):
+        return self._request('DELETE', endpoint, params)
+
+    async def _request(
+            self, method: str,
+            endpoint: str,
+            params: dict = None,
+            json: dict = None,
+    ) -> RESULT:
         url = self._base_url + endpoint
-        resp = await self._client.request(method, url, params=params)
+        resp = await self._client.request(method, url, params=params, json=json)
         return get_result(resp)
 
 
