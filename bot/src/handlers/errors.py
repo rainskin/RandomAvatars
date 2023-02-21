@@ -1,10 +1,8 @@
-from aiogram import types
-
 import lib
 
 
 @lib.events.bad_request
-async def _(update: types.Update, exc: Exception):
+async def _(update: lib.UPDATE, exc: Exception):
     error_desc = exc.args[0]
 
     if error_desc == 'Not enough rights to send photos to the chat':

@@ -4,7 +4,7 @@ import lib
 
 
 @lib.events.start
-async def _(msg: types.Message):
+async def _(msg: lib.MESSAGE):
     await lib.reset_state()
     await lib.answers.start(msg)
 

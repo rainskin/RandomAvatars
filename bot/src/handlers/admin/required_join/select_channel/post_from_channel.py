@@ -1,5 +1,3 @@
-from aiogram import types
-from aiogram.dispatcher import FSMContext
 from aiogram.utils.exceptions import TelegramAPIError
 
 import lib
@@ -9,7 +7,7 @@ from loader import api
 
 
 @dp.any_message(state=States.required_join)
-async def _(msg: types.Message, state: FSMContext):
+async def _(msg: lib.MESSAGE):
     from_channel = msg.forward_from_chat
 
     if not from_channel:
@@ -22,6 +20,6 @@ async def _(msg: types.Message, state: FSMContext):
         await msg.answer('У меня нет нужных прав в этом канале')
         return
 
-    await state.finish()
+    await lib.reset_state()
     await api.required_join.set_chat_id(from_channel.id)
     await msg.answer('Обязательная подписка настроена')

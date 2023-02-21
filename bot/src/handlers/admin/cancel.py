@@ -1,12 +1,8 @@
-from aiogram import types
-from aiogram.dispatcher import FSMContext
-
-import lib.events.admin
-from assets import kbs, texts
+import lib
 
 
 @lib.events.admin.back
-async def _(query: types.CallbackQuery, state: FSMContext):
+async def _(query: lib.QUERY):
     await query.answer()
-    await state.finish()
-    await query.message.edit_text(texts.admin_panel, reply_markup=kbs.admin_panel)
+    await lib.reset_state()
+    await lib.answers.admin_panel(query)

@@ -1,25 +1,20 @@
-from aiogram import types
-
 import config
-from assets import PictureCategory, texts, kbs, commands
+from assets import PictureCategory, kbs, commands
 from core import dp
 from loader import api
 from . import events, answers
 from .broadcast import Broadcast
+from .consts import *
 from .invite_links import get_chat_invite_link
-from .picture_request import PictureRequest, Request
+from .picture_request import PictureRequest
 
 
-def on_picture_request(request: Request, category: PictureCategory):
+def on_picture_request(request: REQUEST, category: PictureCategory):
     return PictureRequest(request, category).respond()
 
 
-def is_admin(user: types.User) -> bool:
+def is_admin(user: USER) -> bool:
     return user.id in config.ADMIN_IDS
-
-
-async def ask_to_restart_bot(msg: types.Message):
-    await msg.answer(texts.ask_restart, reply_markup=kbs.removed)
 
 
 def contain_trigger_words(text: str, trigger_words: list[str]) -> bool:
@@ -40,17 +35,17 @@ TRIGGERS_TO_CATEGORY = [
 ]
 
 
-def schedule_broadcast(post: types.Message):
+def schedule_broadcast(post: MESSAGE):
     Broadcast(post).schedule()
 
 
-def save_chat(chat: types.Chat):
+def save_chat(chat: CHAT):
     return api.save_chat(chat.id)
 
 
 async def reset_state():
-    chat = types.Chat.get_current()
-    user = types.User.get_current()
+    chat = CHAT.get_current()
+    user = USER.get_current()
     await dp.storage.finish(chat=chat.id, user=user.id)
 
 
@@ -58,13 +53,13 @@ def update_my_commands():
     return commands.setup()
 
 
-def choose_picture_category(request: types.Message | types.CallbackQuery) -> PictureCategory | None:
-    if isinstance(request, types.Message):
+def choose_picture_category(request: REQUEST) -> PictureCategory | None:
+    if isinstance(request, MESSAGE):
         return _choose_picture_category_message(request)
     return _choose_picture_category_query(request)
 
 
-def _choose_picture_category_message(request: types.Message) -> PictureCategory | None:
+def _choose_picture_category_message(request: MESSAGE) -> PictureCategory | None:
     if command := request.get_command(pure=True):
         words = [command]
     else:
@@ -76,7 +71,7 @@ def _choose_picture_category_message(request: types.Message) -> PictureCategory 
                 return category
 
 
-def _choose_picture_category_query(request: types.CallbackQuery) -> PictureCategory | None:
+def _choose_picture_category_query(request: QUERY) -> PictureCategory | None:
     kb = kbs.MainMenu
 
     match request.data:
@@ -90,5 +85,5 @@ def _choose_picture_category_query(request: types.CallbackQuery) -> PictureCateg
             return PictureCategory.ANGRY
 
 
-async def get_picture_category(for_user: types.User) -> PictureCategory | None:
+async def get_picture_category(for_user: USER) -> PictureCategory | None:
     return await api.get_picture_category(for_user.id)

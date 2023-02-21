@@ -1,5 +1,3 @@
-from aiogram import types
-
 import lib
 from assets import kbs
 from core import dp
@@ -7,7 +5,7 @@ from loader import api
 
 
 @dp.click(kbs.AdminPanel.required_join)
-async def _(query: types.CallbackQuery):
+async def _(query: lib.QUERY):
     required_chat_id = await api.required_join.get_chat_id()
 
     if required_chat_id:

@@ -5,15 +5,14 @@ from aiogram.utils.exceptions import TelegramAPIError
 from assets import PictureCategory, texts, kbs
 from core import bot
 from loader import api
+from .consts import *
 from .invite_links import get_chat_invite_link
-
-Request = types.Message | types.CallbackQuery
 
 
 class PictureRequest:
     _picture: list[str] = None
 
-    def __init__(self, request: Request, category: PictureCategory):
+    def __init__(self, request: REQUEST, category: PictureCategory):
         self._require_keyboard = False
         self._user_id = request.from_user.id
         self._category = category

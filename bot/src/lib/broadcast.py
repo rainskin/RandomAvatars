@@ -1,15 +1,15 @@
 import asyncio
 
-from aiogram import types
 from aiogram.utils.exceptions import RetryAfter, TelegramAPIError
 
 from assets import texts
 from loader import api
+from .consts import *
 
 
 class Broadcast:
 
-    def __init__(self, post: types.Message):
+    def __init__(self, post: MESSAGE):
         self._loop = asyncio.get_running_loop()
         self._post = post
         self._delivered_count = 0
