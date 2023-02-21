@@ -17,10 +17,20 @@ class Dispatcher(aiogram.Dispatcher):
     def any_message(self, state: State | str = None):
         return self.message_handler(content_types='any', state=state)
 
-    def click(self, button: str | CallbackButton, state: State | str = None):
+    def click(
+            self,
+            button: str | CallbackButton | list[CallbackButton],
+            state: State | str = None,
+    ):
         if isinstance(button, str):
             return self.message_handler(text=button, state=state)
-        return self.callback_query_handler(text=button.data, state=state)
+
+        if isinstance(button, CallbackButton):
+            text = button.data
+        else:
+            text = [i.data for i in button]
+
+        return self.callback_query_handler(text=text, state=state)
 
     def text(self, value: str = None):
         return self.message_handler(text=value)

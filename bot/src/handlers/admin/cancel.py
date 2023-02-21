@@ -1,11 +1,11 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
+import lib.events.admin
 from assets import kbs, texts
-from core import dp
 
 
-@dp.click(kbs.ADMIN_BACK_BUTTON, state='*')
+@lib.events.admin.back
 async def _(query: types.CallbackQuery, state: FSMContext):
     await query.answer()
     await state.finish()

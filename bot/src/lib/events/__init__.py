@@ -2,6 +2,7 @@ from aiogram.utils.exceptions import BadRequest
 
 from assets import commands
 from core import dp
+from . import main_menu, picture_menu
 
 start = dp.command(commands.START, state='*')
 text = dp.text()

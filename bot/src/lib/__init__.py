@@ -58,7 +58,13 @@ def update_my_commands():
     return commands.setup()
 
 
-def choose_picture_category(request: types.Message) -> PictureCategory | None:
+def choose_picture_category(request: types.Message | types.CallbackQuery) -> PictureCategory | None:
+    if isinstance(request, types.Message):
+        return _choose_picture_category_message(request)
+    return _choose_picture_category_query(request)
+
+
+def _choose_picture_category_message(request: types.Message) -> PictureCategory | None:
     if command := request.get_command(pure=True):
         words = [command]
     else:
@@ -68,3 +74,21 @@ def choose_picture_category(request: types.Message) -> PictureCategory | None:
         for triggers, category in TRIGGERS_TO_CATEGORY:
             if word in triggers:
                 return category
+
+
+def _choose_picture_category_query(request: types.CallbackQuery) -> PictureCategory | None:
+    kb = kbs.MainMenu
+
+    match request.data:
+        case kb.anime_avatars.data:
+            return PictureCategory.AVATAR
+        case kb.paired_avatars.data:
+            return PictureCategory.PAIRED_AVATARS
+        case kb.cute_pictures.data:
+            return PictureCategory.CUTE
+        case kb.angry_pictures.data:
+            return PictureCategory.ANGRY
+
+
+async def get_picture_category(for_user: types.User) -> PictureCategory | None:
+    return await api.get_picture_category(for_user.id)

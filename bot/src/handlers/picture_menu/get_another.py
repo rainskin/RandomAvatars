@@ -1,14 +1,11 @@
 from aiogram import types
 
 import lib
-from assets import kbs
-from core import dp
-from loader import api
 
 
-@dp.click(kbs.PictureMenu.get_another)
+@lib.events.picture_menu.get_another
 async def _(msg: types.Message):
-    category = await api.get_picture_category(msg.from_user.id)
+    category = await lib.get_picture_category(msg.from_user)
 
     if not category:
         await lib.ask_to_restart_bot(msg)
@@ -17,6 +14,6 @@ async def _(msg: types.Message):
     await lib.on_picture_request(msg, category)
 
 
-@dp.text('♻️ Хочу другую')
+@lib.events.picture_menu.old_get_another
 async def _(msg: types.Message):
     await lib.ask_to_restart_bot(msg)
