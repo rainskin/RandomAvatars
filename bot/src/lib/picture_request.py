@@ -1,7 +1,11 @@
 from aiogram import types
+from aiogram.types import ChatType
+from aiogram.utils.exceptions import TelegramAPIError
 
 from assets import PictureCategory, texts, kbs
+from core import bot
 from loader import api
+from .invite_links import get_chat_invite_link
 
 Request = types.Message | types.CallbackQuery
 
@@ -23,15 +27,22 @@ class PictureRequest:
         self._chat = self._message.chat
 
     async def respond(self):
+        required_join_chat_id = await self._get_required_join_chat_id()
         cooldown = await api.get_cooldown(self._user_id, self._chat.type)
+        await api.save_chat(self._chat.id)
+
+        if required_join_chat_id:
+            invite_link = await get_chat_invite_link(required_join_chat_id)
+            text = texts.ask_to_join_chat.format(invite_link=invite_link)
+            await self._message.answer(text)
+            return
 
         if cooldown:
             await self._ask_wait(cooldown)
-        else:
-            self._picture = await api.get_picture(self._chat.id, self._category)
-            await self._answer()
+            return
 
-        await api.save_chat(self._chat.id)
+        self._picture = await api.get_picture(self._chat.id, self._category)
+        await self._answer()
 
     def _ask_wait(self, cooldown: int):
         text = texts.wait_for.format(time=cooldown)
@@ -53,3 +64,20 @@ class PictureRequest:
             await self._message.answer_media_group(media)
         else:
             await self._message.answer_photo(photo_ids[0])
+
+    async def _get_required_join_chat_id(self) -> int | None:
+        if self._chat.type != ChatType.PRIVATE:
+            return None
+
+        required_chat_id = await api.required_join.get_chat_id()
+
+        if not required_chat_id:
+            return None
+
+        try:
+            chat_member = await bot.get_chat_member(required_chat_id, self._user_id)
+        except TelegramAPIError:
+            return required_chat_id
+
+        if not chat_member.is_chat_member():
+            return required_chat_id

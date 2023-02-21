@@ -3,8 +3,8 @@ from aiogram.utils.deep_linking import get_startgroup_link
 
 import config
 from assets import PictureCategory, texts, kbs
-from core import bot
 from .broadcast import Broadcast
+from .invite_links import get_chat_invite_link
 from .picture_request import PictureRequest, Request
 
 
@@ -47,12 +47,3 @@ TRIGGERS_TO_CATEGORY = [
 
 def schedule_broadcast(post: types.Message):
     Broadcast(post).schedule()
-
-
-async def get_chat_invite_link(chat_id: int) -> str:
-    chat = await bot.get_chat(chat_id)
-
-    if not chat.invite_link:
-        chat.invite_link = await chat.create_invite_link()
-
-    return chat.invite_link
