@@ -6,7 +6,7 @@ import lib
 @lib.events.start
 async def _(msg: types.Message):
     await lib.reset_state()
-    await lib.answer_start(msg)
+    await lib.answers.start(msg)
 
     if lib.is_admin(msg.from_user):
         await lib.update_my_commands()

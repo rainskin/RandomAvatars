@@ -3,11 +3,11 @@ from contextlib import suppress
 from aiogram import types
 from aiogram.utils.exceptions import BadRequest
 
+import lib
 from assets import texts
-from core import dp
 
 
-@dp.errors_handler(exception=BadRequest)
+@lib.events.bad_request
 async def _(update: types.Update, exc: BadRequest):
     error_desc = exc.args[0]
     msg = update.message or update.callback_query.message
