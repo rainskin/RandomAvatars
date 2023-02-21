@@ -1,23 +1,14 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
-from aiogram.types import ChatType
 
 import lib
-from assets import commands, texts
-from core import dp
-from loader import api
 
 
-@dp.command(commands.START, state='*')
-async def _(msg: types.Message, state: FSMContext):
-    await state.finish()
-
-    if msg.chat.type == ChatType.PRIVATE:
-        await lib.answer_main_menu(msg)
-    else:
-        await msg.answer(texts.group_welcome)
+@lib.events.start
+async def _(msg: types.Message):
+    await lib.reset_state()
+    await lib.answer_start(msg)
 
     if lib.is_admin(msg.from_user):
-        await commands.setup()
+        await lib.update_my_commands()
 
-    await api.save_chat(msg.chat.id)
+    await lib.save_chat(msg.chat)

@@ -1,9 +1,8 @@
 from aiogram import types
 
-from assets import commands, texts
-from core import dp
+import lib
 
 
-@dp.command(commands.SEND_PICTURE)
+@lib.events.send_picture
 async def _(msg: types.Message):
-    await msg.answer(texts.command_not_work)
+    await lib.answers.does_not_work(msg)
