@@ -1,4 +1,4 @@
-from core import env
+from lib.core import env
 
 ADMIN_IDS = [724477101, 936845322]
 

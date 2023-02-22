@@ -1,17 +1,17 @@
 import lib
+from lib import events, answers, MESSAGE
 
 
-@lib.events.picture_menu.get_another
-async def _(msg: lib.MESSAGE):
+@events.picture_menu.get_another
+async def _(msg: MESSAGE):
     category = await lib.get_picture_category(msg.from_user)
 
     if not category:
-        await lib.answers.ask_to_restart_bot(msg)
-        return
+        return await answers.ask_to_restart_bot(msg)
 
     await lib.on_picture_request(msg, category)
 
 
-@lib.events.picture_menu.old_get_another
-async def _(msg: lib.MESSAGE):
-    await lib.answers.ask_to_restart_bot(msg)
+@events.picture_menu.old_get_another
+async def _(msg: MESSAGE):
+    await answers.ask_to_restart_bot(msg)

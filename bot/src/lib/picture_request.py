@@ -2,11 +2,12 @@ from aiogram import types
 from aiogram.types import ChatType
 from aiogram.utils.exceptions import TelegramAPIError
 
-from assets import PictureCategory, texts, kbs
-from core import bot
-from loader import api
+from lib.assets import PictureCategory
+from .assets import texts, kbs
+from lib.core import bot
+from lib.loader import api
 from .consts import *
-from .invite_links import get_chat_invite_link
+from .utils import get_chat_invite_link
 
 
 class PictureRequest:

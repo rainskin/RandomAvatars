@@ -1,4 +1,4 @@
-from core import BaseApi
+from lib.core import BaseApi
 
 
 class RequiredJoin(BaseApi):

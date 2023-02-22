@@ -1,4 +1,4 @@
-from core.keyboards import InlineKeyboard, CallbackButton, UrlButton, ReplyKeyboard, RemovedKeyboard
+from lib.core.keyboards import *
 
 ADMIN_BACK_BUTTON = CallbackButton('🔙 Назад')
 

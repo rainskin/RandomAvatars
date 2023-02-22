@@ -1,12 +1,12 @@
 import config
-from assets import PictureCategory, kbs, commands
-from core import dp
-from loader import api
+from lib.assets import PictureCategory, commands
+from .assets import kbs
+from lib.loader import api
 from . import events, answers
 from .broadcast import Broadcast
 from .consts import *
-from .invite_links import get_chat_invite_link
 from .picture_request import PictureRequest
+from .utils import get_chat_invite_link, reset_state
 
 
 def on_picture_request(request: REQUEST, category: PictureCategory):
@@ -41,12 +41,6 @@ def schedule_broadcast(post: MESSAGE):
 
 def save_chat(chat: CHAT):
     return api.save_chat(chat.id)
-
-
-async def reset_state():
-    chat = CHAT.get_current()
-    user = USER.get_current()
-    await dp.storage.finish(chat=chat.id, user=user.id)
 
 
 def update_my_commands():
@@ -87,3 +81,7 @@ def _choose_picture_category_query(request: QUERY) -> PictureCategory | None:
 
 async def get_picture_category(for_user: USER) -> PictureCategory | None:
     return await api.get_picture_category(for_user.id)
+
+
+def reset_required_join():
+    return api.required_join.set_chat_id(None)

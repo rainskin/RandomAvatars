@@ -2,8 +2,8 @@ import asyncio
 
 from aiogram.utils.exceptions import RetryAfter, TelegramAPIError
 
-from assets import texts
-from loader import api
+from .assets import texts
+from lib.loader import api
 from .consts import *
 
 

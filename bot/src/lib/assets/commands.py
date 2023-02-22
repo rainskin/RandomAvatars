@@ -4,7 +4,7 @@ from aiogram.types import BotCommand, BotCommandScopeChat
 from aiogram.utils.exceptions import TelegramAPIError
 
 import config
-from core import bot
+from lib.core import bot
 
 START = 'start'
 GET_AVATARS = 'get_avatars'

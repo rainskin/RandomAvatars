@@ -1,5 +1,5 @@
-from assets import PictureCategory
-from core import BaseApi
+from lib.assets import PictureCategory
+from lib.core import BaseApi
 from .required_join import RequiredJoin
 
 

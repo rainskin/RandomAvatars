@@ -1,6 +1,6 @@
 from aiogram import types
 
-from assets import States
+from lib.assets import States
 
 __all__ = [
     'UPDATE',
