@@ -1,4 +1,4 @@
-from lib.core import StrEnum
+from core import StrEnum
 
 
 class PictureCategory(StrEnum):

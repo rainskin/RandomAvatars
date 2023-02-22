@@ -1,5 +1,5 @@
 from lib.assets import kbs
-from lib.core import dp
+from core import dp
 
 _PICTURE_BUTTONS = [
     kbs.MainMenu.anime_avatars,

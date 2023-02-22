@@ -1,5 +1,5 @@
 from lib.assets import kbs
-from lib.core import dp
+from core import dp
 
 get_another = dp.click(kbs.PictureMenu.get_another)
 old_get_another = dp.text('♻️ Хочу другую')

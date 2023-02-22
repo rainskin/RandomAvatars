@@ -4,7 +4,7 @@ from aiogram.utils.exceptions import TelegramAPIError
 
 from lib.assets import PictureCategory
 from .assets import texts, kbs
-from lib.core import bot
+from core import bot
 from lib.loader import api
 from .consts import *
 from .utils import get_chat_invite_link

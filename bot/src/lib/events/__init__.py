@@ -1,7 +1,7 @@
 from aiogram.utils.exceptions import BadRequest
 
 from lib.assets import commands
-from lib.core import dp
+from core import dp
 from . import main_menu, picture_menu, admin
 
 start = dp.command(commands.START, state='*')

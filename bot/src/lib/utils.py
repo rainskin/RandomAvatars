@@ -1,5 +1,5 @@
-from lib.core import bot
-from lib.core import dp
+from core import bot
+from core import dp
 from .consts import *
 
 
