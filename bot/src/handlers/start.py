@@ -1,5 +1,3 @@
-from aiogram import types
-
 import lib
 
 
