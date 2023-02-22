@@ -1,8 +1,8 @@
-import lib
+from lib import *
 
 
-@lib.events.admin.back
-async def _(query: lib.QUERY):
+@events.admin.back
+async def _(query: QUERY):
     await query.answer()
-    await lib.reset_state()
-    await lib.answers.admin_panel(query)
+    await reset_state()
+    await answers.admin_panel(query)

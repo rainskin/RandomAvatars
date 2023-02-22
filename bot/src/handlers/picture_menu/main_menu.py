@@ -1,6 +1,6 @@
-import lib
+from lib import *
 
 
-@lib.events.picture_menu.main_menu
-async def _(msg: lib.MESSAGE):
-    await lib.answers.main_menu(msg)
+@events.picture_menu.main_menu
+async def _(msg: MESSAGE):
+    await answers.main_menu(msg)

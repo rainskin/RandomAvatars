@@ -1,6 +1,6 @@
-import lib
+from lib import *
 
 
-@lib.events.admin.command
-async def _(msg: lib.MESSAGE):
-    await lib.answers.admin_panel(msg)
+@events.admin.command
+async def _(msg: MESSAGE):
+    await answers.admin_panel(msg)

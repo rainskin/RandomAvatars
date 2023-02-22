@@ -1,12 +1,12 @@
-import lib
+from lib import *
 
 
-@lib.events.start
-async def _(msg: lib.MESSAGE):
-    await lib.reset_state()
-    await lib.answers.start(msg)
+@events.start
+async def _(msg: MESSAGE):
+    await reset_state()
+    await answers.start(msg)
 
-    if lib.is_admin(msg.from_user):
-        await lib.update_my_commands()
+    if is_admin(msg.from_user):
+        await update_my_commands()
 
-    await lib.save_chat(msg.chat)
+    await save_chat(msg.chat)

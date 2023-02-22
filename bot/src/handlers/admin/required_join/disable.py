@@ -1,8 +1,8 @@
-import lib
+from lib import *
 
 
-@lib.events.admin.required_join_disable
-async def _(query: lib.QUERY):
+@events.admin.required_join_disable
+async def _(query: QUERY):
     await query.answer()
-    await lib.reset_required_join()
-    await lib.answers.required_join_disabled(query)
+    await reset_required_join()
+    await answers.required_join_disabled(query)

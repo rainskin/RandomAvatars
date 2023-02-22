@@ -1,8 +1,8 @@
-import lib
+from lib import *
 
 
-@lib.events.admin.broadcast_post
-async def _(msg: lib.MESSAGE):
-    await lib.reset_state()
-    await lib.answers.broadcast_started(msg)
-    lib.schedule_broadcast(msg)
+@events.admin.broadcast_post
+async def _(msg: MESSAGE):
+    await reset_state()
+    await answers.broadcast_started(msg)
+    schedule_broadcast(msg)

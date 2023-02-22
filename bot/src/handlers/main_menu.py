@@ -1,7 +1,7 @@
-import lib
+from lib import *
 
 
-@lib.events.main_menu.get_picture
-async def _(query: lib.QUERY):
-    if category := lib.choose_picture_category(query):
-        await lib.on_picture_request(query, category)
+@events.main_menu.get_picture
+async def _(query: QUERY):
+    if category := choose_picture_category(query):
+        await on_picture_request(query, category)

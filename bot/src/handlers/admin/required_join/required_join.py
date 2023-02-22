@@ -1,6 +1,6 @@
-import lib
+from lib import *
 
 
-@lib.events.admin.required_join
-async def _(query: lib.QUERY):
-    await lib.answers.required_join_info(query)
+@events.admin.required_join
+async def _(query: QUERY):
+    await answers.required_join_info(query)

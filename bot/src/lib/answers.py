@@ -5,7 +5,7 @@ from aiogram.utils.deep_linking import get_startgroup_link
 from aiogram.utils.exceptions import BadRequest, TelegramAPIError
 
 from .assets import texts, kbs
-from lib.loader import api
+from .loader import api
 from .consts import *
 from .utils import get_chat_invite_link, reset_state
 

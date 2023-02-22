@@ -1,10 +1,9 @@
 import config
-from lib.assets import PictureCategory, commands
-from .assets import kbs
-from lib.loader import api
 from . import events, answers
+from .assets import PictureCategory, commands, kbs
 from .broadcast import Broadcast
 from .consts import *
+from .loader import api
 from .picture_request import PictureRequest
 from .utils import get_chat_invite_link, reset_state
 

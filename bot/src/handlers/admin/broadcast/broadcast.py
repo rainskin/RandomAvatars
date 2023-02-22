@@ -1,8 +1,8 @@
-import lib
+from lib import *
 
 
-@lib.events.admin.broadcast
-async def _(query: lib.QUERY):
+@events.admin.broadcast
+async def _(query: QUERY):
     await query.answer()
-    await lib.STATES.broadcast.set()
-    await lib.answers.ask_broadcast_post(query)
+    await STATES.broadcast.set()
+    await answers.ask_broadcast_post(query)
