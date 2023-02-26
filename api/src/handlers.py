@@ -9,8 +9,10 @@ from database import models
 from enums import PictureCategory, ChatType
 from loader import db, app
 
+USER_PREFIX = '/user/{user_id}'
 
-@app.get('/picture/{category}')
+
+@app.get('/pictures/{category}')
 def get_picture(category: PictureCategory, chat_id: int):
     pictures = db.get_pictures(category, chat_id)
     picture: models.Picture = random.choice(pictures)
@@ -18,7 +20,7 @@ def get_picture(category: PictureCategory, chat_id: int):
     return make_response(picture.photo_ids)
 
 
-@app.get('/cooldown/{user_id}')
+@app.get(f'{USER_PREFIX}/cooldown')
 def get_cooldown(user_id: int, chat_type: ChatType):
     user = db.get_user(user_id)
 
@@ -31,20 +33,20 @@ def get_cooldown(user_id: int, chat_type: ChatType):
     return make_response(remaining_time)
 
 
-@app.post('/cooldown/{user_id}')
+@app.post(f'{USER_PREFIX}/cooldown')
 def set_cooldown(user_id: int):
     user = db.get_user(user_id)
     user.save_last_request_time(time.time())
     return OK
 
 
-@app.get('/picture-category/{user_id}')
+@app.get(f'{USER_PREFIX}/picture-category')
 async def get_picture_category(user_id: int):
     user = db.get_user(user_id)
     return make_response(user.picture_category)
 
 
-@app.post('/picture-category/{user_id}')
+@app.post(f'{USER_PREFIX}/picture-category')
 async def set_picture_category(user_id: int, category: PictureCategory):
     user = db.get_user(user_id)
     user.save_picture_category(category)

@@ -20,7 +20,7 @@ class Broadcast:
         self._loop.create_task(self._broadcast())
 
     async def _broadcast(self):
-        chat_ids = await api.get_chats()
+        chat_ids = await api.chats.get()
 
         for i in chat_ids:
             await self._try_copy_post(i)

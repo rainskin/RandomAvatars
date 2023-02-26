@@ -8,13 +8,13 @@ class BaseApi:
         self._base_url = base_url
         self._client = httpx.AsyncClient()
 
-    def _get(self, endpoint: str, params: dict = None):
+    def _get(self, endpoint: str = '', params: dict = None):
         return self._request('GET', endpoint, params)
 
-    def _set(self, endpoint: str, params: dict = None, json: dict = None):
+    def _set(self, endpoint: str = '', params: dict = None, json: dict = None):
         return self._request('POST', endpoint, params, json)
 
-    def _delete(self, endpoint: str, params: dict = None):
+    def _delete(self, endpoint: str = '', params: dict = None):
         return self._request('DELETE', endpoint, params)
 
     async def _request(

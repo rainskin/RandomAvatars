@@ -5,7 +5,7 @@ from .broadcast import Broadcast
 from .consts import *
 from .loader import api
 from .picture_request import PictureRequest
-from .utils import get_chat_invite_link, reset_state
+from .utils import get_chat_invite_link, reset_state, save_chat
 
 
 def on_picture_request(request: REQUEST, category: PictureCategory):
@@ -36,10 +36,6 @@ TRIGGERS_TO_CATEGORY = [
 
 def schedule_broadcast(post: MESSAGE):
     Broadcast(post).schedule()
-
-
-def save_chat(chat: CHAT):
-    return api.save_chat(chat.id)
 
 
 def update_my_commands():
@@ -79,8 +75,8 @@ def _choose_picture_category_query(request: QUERY) -> PictureCategory | None:
             return category
 
 
-async def get_picture_category(for_user: USER) -> PictureCategory | None:
-    return await api.get_picture_category(for_user.id)
+def get_picture_category(for_user: USER) -> PictureCategory | None:
+    return api.user(for_user.id).picture_category.get()
 
 
 def reset_required_join():

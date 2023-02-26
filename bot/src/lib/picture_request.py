@@ -6,7 +6,7 @@ from core import bot
 from .assets import texts, kbs, PictureCategory
 from .consts import *
 from .loader import api
-from .utils import get_chat_invite_link
+from .utils import get_chat_invite_link, save_chat
 
 
 class PictureRequest:
@@ -27,8 +27,8 @@ class PictureRequest:
 
     async def respond(self):
         required_join_chat_id = await self._get_required_join_chat_id()
-        cooldown = await api.get_cooldown(self._user_id, self._chat.type)
-        await api.save_chat(self._chat.id)
+        cooldown = await api.user(self._user_id).cooldown.get(self._chat.type)
+        await save_chat(self._chat)
 
         if required_join_chat_id:
             invite_link = await get_chat_invite_link(required_join_chat_id)
@@ -40,7 +40,7 @@ class PictureRequest:
             await self._ask_wait(cooldown)
             return
 
-        self._picture = await api.get_picture(self._chat.id, self._category)
+        self._picture = await api.pictures(self._category).get_random(self._chat.id)
         await self._answer()
 
     def _ask_wait(self, cooldown: int):
@@ -49,11 +49,11 @@ class PictureRequest:
 
     async def _answer(self):
         await self._send_picture()
-        await api.set_cooldown(self._user_id)
+        await api.user(self._user_id).cooldown.set()
 
         if self._require_keyboard:
             await self._message.answer(texts.picture_menu_hint, reply_markup=kbs.picture_menu)
-            await api.set_picture_category(self._user_id, self._category)
+            await api.user(self._user_id).picture_category.set(self._category)
 
     async def _send_picture(self):
         photo_ids = self._picture
