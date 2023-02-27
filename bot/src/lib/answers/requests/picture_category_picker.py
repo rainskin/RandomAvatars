@@ -1,6 +1,6 @@
 import config
-from lib.assets import PictureCategory, commands, kbs
 from core.constants import *
+from lib.assets import PictureCategory, commands, kbs
 
 
 class PictureCategoryPicker:
@@ -17,7 +17,7 @@ class PictureCategoryPicker:
         if command := self._request.get_command(pure=True):
             words = [command]
         else:
-            words = self._request.text.split()
+            words = self._request.text.lower().split()
 
         triggers_to_category = [
             (config.TriggerWords.AVATAR + [commands.GET_AVATARS], PictureCategory.AVATAR),
