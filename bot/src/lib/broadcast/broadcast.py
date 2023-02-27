@@ -1,20 +1,20 @@
 import asyncio
+from dataclasses import dataclass
 
 from aiogram.utils.exceptions import RetryAfter, TelegramAPIError
 
-from .assets import texts
-from .loader import api
-from .consts import *
+from lib.assets import texts
+from core.constants import *
+from lib.loader import api
 
 
 class Broadcast:
+    INTERVAL = 0.1
 
     def __init__(self, post: MESSAGE):
         self._loop = asyncio.get_running_loop()
         self._post = post
-        self._delivered_count = 0
-        self._floods_count = 0
-        self._errors_count = 0
+        self._message_count = MessageCount()
 
     def schedule(self):
         self._loop.create_task(self._broadcast())
@@ -31,21 +31,29 @@ class Broadcast:
         try:
             await self._post.copy_to(chat_id)
         except RetryAfter as e:
-            self._floods_count += 1
+            self._message_count.floods += 1
             await asyncio.sleep(e.timeout)
         except TelegramAPIError:
-            self._errors_count += 1
+            self._message_count.errors += 1
         else:
-            self._delivered_count += 1
+            self._message_count.delivered += 1
         finally:
-            await asyncio.sleep(0.1)
+            await asyncio.sleep(self.INTERVAL)
 
     def _send_summary(self):
-        return self._post.answer(self._get_summary())
+        return self._post.answer(self._message_count.summary)
 
-    def _get_summary(self) -> str:
+
+@dataclass
+class MessageCount:
+    delivered: int = 0
+    floods: int = 0
+    errors: int = 0
+
+    @property
+    def summary(self) -> str:
         return texts.broadcast_summary.format(
-            delivered_count=self._delivered_count,
-            floods_count=self._floods_count,
-            errors_count=self._errors_count,
+            delivered_count=self.delivered,
+            floods_count=self.floods,
+            errors_count=self.errors,
         )

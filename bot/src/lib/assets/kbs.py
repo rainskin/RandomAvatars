@@ -63,8 +63,8 @@ class RequiredJoin(InlineKeyboard):
         )
 
 
-removed = RemovedKeyboard().create()
-admin_cancel = AdminCancel().create()
-picture_menu = PictureMenu().create()
-admin_panel = AdminPanel().create()
-required_join = RequiredJoin().create()
+removed = RemovedKeyboard()
+admin_cancel = AdminCancel()
+picture_menu = PictureMenu()
+admin_panel = AdminPanel()
+required_join = RequiredJoin()
