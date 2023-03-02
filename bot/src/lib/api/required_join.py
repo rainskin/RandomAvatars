@@ -8,8 +8,14 @@ class RequiredJoin(BaseApi):
             endpoint=f'/chat',
         )
 
-    def set_chat_id(self, chat_id: int | None) -> bool:
+    def set_chat_id(self, chat_id: int) -> bool:
         return self._set(
             endpoint=f'/chat',
             json={'chat_id': chat_id},
+        )
+
+    def reset(self) -> bool:
+        return self._set(
+            endpoint=f'/chat',
+            json={'chat_id': None},
         )

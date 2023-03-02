@@ -1,7 +1,7 @@
 from lib.assets import PictureCategory
-from core.constants import *
 from .picture_category_picker import PictureCategoryPicker
 from .picture_request import PictureRequest
+from core.constants import *
 
 
 async def respond(request: REQUEST):

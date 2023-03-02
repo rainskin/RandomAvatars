@@ -2,12 +2,12 @@ from aiogram import types
 from aiogram.types import ChatType
 from aiogram.utils.exceptions import TelegramAPIError
 
-from core import bot
 from core.answers import answer
+from core import *
+from core.utils import get_invite_link
 from lib.assets import texts, kbs, PictureCategory
-from core.constants import *
 from lib.loader import api
-from lib.utils import get_chat_invite_link, save_chat
+from lib.utils import save_chat
 
 
 class PictureRequest:
@@ -32,7 +32,7 @@ class PictureRequest:
         await save_chat(self._chat)
 
         if required_join_chat_id:
-            invite_link = await get_chat_invite_link(required_join_chat_id)
+            invite_link = await get_invite_link(required_join_chat_id)
             text = texts.ask_to_join_chat.format(invite_link=invite_link)
             await self._message.answer(text)
             return

@@ -1,17 +1,8 @@
 import config
-from core import bot, dp
 from core.constants import *
+from core import dp
 from .assets import commands, PictureCategory
 from .loader import api
-
-
-async def get_chat_invite_link(chat_id: int) -> str:
-    chat = await bot.get_chat(chat_id)
-
-    if not chat.invite_link:
-        chat.invite_link = await chat.create_invite_link()
-
-    return chat.invite_link
 
 
 async def reset_state():
@@ -22,10 +13,6 @@ async def reset_state():
 
 def save_chat(chat: CHAT):
     return api.chats.save(chat.id)
-
-
-def reset_required_join():
-    return api.required_join.set_chat_id(None)
 
 
 def is_admin(user: USER) -> bool:

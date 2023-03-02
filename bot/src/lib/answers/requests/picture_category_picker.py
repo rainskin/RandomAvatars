@@ -1,6 +1,6 @@
 import config
-from core.constants import *
 from lib.assets import PictureCategory, commands, kbs
+from core.constants import *
 
 
 class PictureCategoryPicker:

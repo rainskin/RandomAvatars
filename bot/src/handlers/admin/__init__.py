@@ -1,8 +1,8 @@
 def setup():
-    from . import admin
-    from . import cancel
+    from . import _start
     from . import broadcast
-    from . import required_join
+    from . import required_joins
+    from . import cancel
 
 
 setup()

@@ -1,18 +1,18 @@
-[tool.poetry]
-name = "api"
-version = "0.1.0"
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
 description = ""
 authors = []
-readme = "README.md"
+dependencies = [
+    "uvicorn>=0.20.0",
+    "fastapi>=0.92.0",
+    "mongoengine>=0.26.0",
+]
+requires-python = ">=3.10"
+license = { text = "MIT" }
 
-[tool.poetry.dependencies]
-python = "^3.10"
-uvicorn = "^0.20.0"
-fastapi = "^0.92.0"
-python-dotenv = "^0.21.1"
-mongoengine = "^0.26.0"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pdm.scripts]
+_.env_file = "../.env"
+start = "python src"

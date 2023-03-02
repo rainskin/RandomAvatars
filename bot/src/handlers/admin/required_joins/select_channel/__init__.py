@@ -1,6 +1,6 @@
 def setup():
     from . import _start
-    from . import post
+    from . import post_from_channel
 
 
 setup()
