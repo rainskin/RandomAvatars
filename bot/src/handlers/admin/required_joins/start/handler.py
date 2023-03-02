@@ -1,7 +1,7 @@
 from core import BaseHandler, utils
-from lib import api
 
-from .assets import event, keyboard
+from lib import api
+from .assets import keyboard
 
 
 class Handler(BaseHandler):
@@ -19,6 +19,3 @@ async def get_text():
 
     invite_link = await utils.get_invite_link(chat_id)
     return f'Обязательная подписка: {invite_link}'
-
-
-Handler.setup(event)

@@ -1,5 +1,6 @@
 from core import BaseHandler
-from .assets import event, state, text, keyboard
+
+from .assets import text, keyboard, state
 
 
 class Handler(BaseHandler):
@@ -7,6 +8,3 @@ class Handler(BaseHandler):
     async def callback(self):
         await state.set()
         await self.answer(text, keyboard)
-
-
-Handler.setup(event)

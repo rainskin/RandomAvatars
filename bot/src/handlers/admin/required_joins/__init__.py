@@ -1,7 +1,7 @@
 def setup():
-    from . import _start
-    from . import select_channel
+    from . import start
     from . import disable
+    from . import select_channel
 
 
 setup()

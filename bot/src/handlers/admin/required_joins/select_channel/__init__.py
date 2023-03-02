@@ -1,5 +1,5 @@
 def setup():
-    from . import _start
+    from . import start
     from . import post_from_channel
 
 

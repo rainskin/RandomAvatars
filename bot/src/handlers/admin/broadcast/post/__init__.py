@@ -1,17 +1,4 @@
-from core import BaseHandler, utils
-from .assets import event, text
-from .broadcast import Broadcast
-
-
-class Handler(BaseHandler):
-
-    async def callback(self):
-        await utils.reset_state()
-        await self.answer(text)
-        self.schedule_broadcast()
-
-    def schedule_broadcast(self):
-        Broadcast(self.message).schedule()
-
+from .handler import Handler
+from .assets import event
 
 Handler.setup(event)
