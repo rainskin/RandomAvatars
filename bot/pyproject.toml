@@ -1,18 +1,19 @@
-[tool.pdm]
-
 [project]
 name = ""
 version = ""
 description = ""
-authors = [
-    {name = "levch", email = "levchenko.d.a1998@gmail.com"},
-]
+authors = []
 dependencies = [
     "core @ file:///${PROJECT_ROOT}/core",
 ]
 requires-python = ">=3.10"
-license = {text = "MIT"}
+license = { text = "MIT" }
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "typer>=0.7.0",
+]
 
 [tool.pdm.scripts]
-_.env_file = "../.env"
-start = "python src"
+start = { cmd = "python src", env_file = "../.env" }
+g = { call = "cli.generate:main" }
