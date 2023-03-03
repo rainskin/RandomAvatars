@@ -1,3 +1,3 @@
 def setup():
-    from . import start
-    from . import post
+    from . import Start
+    from . import Post

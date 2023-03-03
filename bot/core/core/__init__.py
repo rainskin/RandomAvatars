@@ -7,9 +7,9 @@ from aiogram.utils.exceptions import TelegramAPIError, BadRequest
 from .api import BaseApi
 from .app import app
 from .bot import bot
+from .controller import BaseController
 from .dispatcher import dp
 from .env import env
-from .handler import BaseHandler
 from .shortcuts import *
 
 __all__ = [
@@ -17,7 +17,7 @@ __all__ = [
     'app',
     'dp',
     'bot',
-    'BaseHandler',
+    'BaseController',
     'BaseApi',
     'UPDATE',
     'MESSAGE',

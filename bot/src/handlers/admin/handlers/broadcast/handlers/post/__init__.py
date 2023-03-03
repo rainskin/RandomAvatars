@@ -1,4 +1,4 @@
-from .handler import Handler
+from .controller import Controller
 from .assets import event
 
-Handler.setup_on(event)
+Controller.setup_on(event)

@@ -1,8 +1,8 @@
 def setup():
-    from . import start
+    from . import Start
     from . import admin
-    from . import main_menu
+    from . import MainMenu
     from . import picture_menu
-    from . import send_picture
-    from . import text
-    from . import errors
+    from . import SendPicture
+    from . import Text
+    from . import Error

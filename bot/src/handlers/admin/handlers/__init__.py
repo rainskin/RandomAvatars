@@ -1,5 +1,5 @@
 def setup():
-    from . import start
+    from . import Start
     from . import broadcast
     from . import required_joins
-    from . import cancel
+    from . import Cancel
