@@ -15,7 +15,7 @@ class Keyboard(ReplyKeyboard):
         )
 
 
-event = dp.command('start', state='*')
+event = dp.text()
 state = States.broadcast
 text = 'Hello, world!'
 keyboard = Keyboard()

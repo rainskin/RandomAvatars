@@ -1,5 +1,6 @@
 import config
-from lib.assets import PictureCategory, commands, kbs
+from lib.assets import PictureCategory, commands
+from assets import keyboards
 from core.constants import *
 
 
@@ -32,7 +33,7 @@ class PictureCategoryPicker:
                     return category
 
     def _pick_from_query(self) -> PictureCategory | None:
-        kb = kbs.MainMenu
+        kb = keyboards.MainMenu
 
         button_to_category = [
             (kb.anime_avatars, PictureCategory.AVATAR),

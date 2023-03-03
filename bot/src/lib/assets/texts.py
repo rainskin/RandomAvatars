@@ -8,16 +8,6 @@ welcome = """
 Добавляй меня в свой чат или начинай пользоваться прямо здесь 😉
 """
 
-group_welcome = f"""
-💕 Спасибо, что добавили меня!
-
-Я умею отправлять аватарки и пикчи для диалогов. Попробуй одну из этих команд:
-
-👉🏻 /{commands.GET_AVATARS} 👉🏻 /{commands.GET_PAIRED}
-👉🏻 /{commands.GET_CUTE} 👉🏻 /{commands.GET_ANGRY}
-👉🏻 /{commands.SEND_PICTURE}
-"""
-
 command_not_work = '🙃 Команда временно не работает. Скоро починим!'
 
 picture_menu_hint = """

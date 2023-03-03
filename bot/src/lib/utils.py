@@ -2,7 +2,7 @@ import config
 from core.constants import *
 from core import dp
 from .assets import commands, PictureCategory
-from .loader import api
+from .api import api
 
 
 async def reset_state():

@@ -1,3 +1,4 @@
+import config
 from lib.assets import PictureCategory
 from .chats import Chats
 from .pictures import Pictures
@@ -17,3 +18,6 @@ class Api:
 
     def pictures(self, category: PictureCategory):
         return Pictures(self._base_url + f'/pictures/{category}')
+
+
+api = Api(config.API_BASE_URL)

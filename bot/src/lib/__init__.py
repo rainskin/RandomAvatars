@@ -7,6 +7,8 @@ from core.constants import *
 
 from . import events, answers, utils
 from .assets import PictureCategory, commands, States, kbs, texts
-from .loader import api
+from .api import api
+from .answers import on_any_request, send_main_menu, respond_picture
+from .utils import is_admin, update_my_commands, save_chat
 
 STATES = States

@@ -1,12 +1,14 @@
 from aiogram import types
 from aiogram.types import ChatType
 from aiogram.utils.exceptions import TelegramAPIError
-
+from core import bot
 from core.answers import answer
-from core import *
+from core.constants import *
 from core.utils import get_invite_link
-from lib.assets import texts, kbs, PictureCategory
-from lib.loader import api
+
+from assets import keyboards
+from lib.api import api
+from lib.assets import texts, PictureCategory
 from lib.utils import save_chat
 
 
@@ -88,7 +90,7 @@ class Response:
         await api.user(self._user_id).cooldown.set()
 
         if self._require_keyboard:
-            await answer(self._message, texts.picture_menu_hint, kbs.picture_menu)
+            await answer(self._message, texts.picture_menu_hint, keyboards.picture_menu)
             await api.user(self._user_id).picture_category.set(self._category)
 
     async def _send_picture(self):

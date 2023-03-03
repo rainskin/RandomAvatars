@@ -4,7 +4,7 @@ from .picture_request import PictureRequest
 from core.constants import *
 
 
-async def respond(request: REQUEST):
+async def on_any_request(request: REQUEST):
     category = PictureCategoryPicker(request).pick()
 
     if category:
