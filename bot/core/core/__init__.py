@@ -1,5 +1,6 @@
 from contextlib import suppress
 
+from aiogram.dispatcher.filters.state import StatesGroup, State
 from aiogram.types import BotCommand, BotCommandScopeChat
 from aiogram.utils.deep_linking import get_start_link, get_startgroup_link
 from aiogram.utils.exceptions import TelegramAPIError, BadRequest
@@ -34,4 +35,6 @@ __all__ = [
     'get_startgroup_link',
     'suppress',
     'utils',
+    'State',
+    'StatesGroup',
 ]

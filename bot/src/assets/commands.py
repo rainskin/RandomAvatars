@@ -10,7 +10,7 @@ ADMIN = 'admin'
 
 
 class Groups:
-    USER = [
+    for_users = [
         BotCommand(START, 'Главное меню'),
         BotCommand(GET_AVATARS, 'Получить аватарку'),
         BotCommand(GET_PAIRED, 'Получить парные аватарки'),
@@ -19,6 +19,6 @@ class Groups:
         BotCommand(SEND_PICTURE, 'Отправить пикчу пользователю'),
     ]
 
-    ADMIN = USER + [
+    for_admins = for_users + [
         BotCommand(ADMIN, 'Админ-панель'),
     ]

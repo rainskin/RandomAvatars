@@ -1,3 +1,3 @@
-from .actions import on_text, send_main_menu, respond_picture
 from .api import api
+from .picture_request import PictureRequest, on_picture_request
 from .utils import save_chat

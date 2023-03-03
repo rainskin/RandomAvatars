@@ -2,9 +2,9 @@ from aiogram.types import ChatType
 
 import config
 from core import BaseController, utils
-from lib import save_chat, send_main_menu
+from lib import save_chat
 from .assets import group_welcome_text
-from .lib import update_my_commands
+from .lib import update_my_commands, send_main_menu
 
 
 class Controller(BaseController):

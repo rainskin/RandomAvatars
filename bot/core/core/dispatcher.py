@@ -11,7 +11,7 @@ class Dispatcher(aiogram.Dispatcher):
     def __init__(self, _bot: Bot):
         super().__init__(_bot, storage=MemoryStorage())
 
-    def command(self, value: str, user_id: list[int] = None, state: State | str = None):
+    def command(self, value: str | list[str], user_id: list[int] = None, state: State | str = None):
         return self.message_handler(commands=value, user_id=user_id, state=state)
 
     def any_message(self, state: State | str = None):

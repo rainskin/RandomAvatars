@@ -1,8 +1,7 @@
 def setup():
     from . import Start
     from . import Admin
-    from . import MainMenu
-    from . import picture_menu
+    from . import GetCommands
     from . import SendPicture
-    from . import Text
+    from . import TextMessage
     from . import Error
