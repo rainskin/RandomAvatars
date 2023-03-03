@@ -1,5 +1,6 @@
-from .constants import *
 from .dispatcher import dp, bot
+from .keyboards import Keyboard
+from .shortcuts import *
 
 
 async def get_invite_link(chat_id: int) -> str:
@@ -15,3 +16,19 @@ def reset_state():
     chat = CHAT.get_current()
     user = USER.get_current()
     return dp.storage.finish(chat=chat.id, user=user.id)
+
+
+def answer(event: EVENT, text: str, keyboard: Keyboard = None):
+    if isinstance(event, MESSAGE):
+        return answer_message(event, text, keyboard)
+    return edit_message(event, text, keyboard)
+
+
+def answer_message(msg: MESSAGE, text: str, keyboard: Keyboard = None):
+    reply_markup = keyboard.create() if keyboard else None
+    return msg.answer(text, reply_markup=reply_markup)
+
+
+def edit_message(query: QUERY, text: str, keyboard: Keyboard = None):
+    reply_markup = keyboard.create() if keyboard else None
+    return query.message.edit_text(text, reply_markup=reply_markup)

@@ -1,24 +1,24 @@
 import config
 from assets import PictureCategory, commands
 from assets import keyboards
-from core.constants import *
+from core import *
 
 
 class PictureCategoryPicker:
 
-    def __init__(self, request: REQUEST):
-        self._request = request
+    def __init__(self, event: EVENT):
+        self._event = event
 
     def pick(self) -> PictureCategory | None:
-        if isinstance(self._request, MESSAGE):
+        if isinstance(self._event, MESSAGE):
             return self._pick_from_message()
         return self._pick_from_query()
 
     def _pick_from_message(self) -> PictureCategory | None:
-        if command := self._request.get_command(pure=True):
+        if command := self._event.get_command(pure=True):
             words = [command]
         else:
-            words = self._request.text.lower().split()
+            words = self._event.text.lower().split()
 
         triggers_to_category = [
             (config.TriggerWords.AVATAR + [commands.GET_AVATARS], PictureCategory.AVATAR),
@@ -43,5 +43,5 @@ class PictureCategoryPicker:
         ]
 
         for button, category in button_to_category:
-            if self._request.data == button.data:
+            if self._event.data == button.data:
                 return category

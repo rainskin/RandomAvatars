@@ -1,30 +1,24 @@
-from aiogram import types
-from aiogram.types import ChatType
-from aiogram.utils.exceptions import TelegramAPIError
-from core import bot
-from core.answers import answer
-from core.constants import *
-from core.utils import get_invite_link
+from aiogram.types import InputMediaPhoto
 
-from assets import keyboards, texts
+from assets import PictureCategory, keyboards, texts
+from core import *
 from lib.api import api
-from assets import PictureCategory
 from lib.utils import save_chat
 
 
 class PictureRequest:
     _picture: list[str] = None
 
-    def __init__(self, request: REQUEST, category: PictureCategory):
+    def __init__(self, event: EVENT, category: PictureCategory):
         self._require_keyboard = False
-        self._user_id = request.from_user.id
+        self._user_id = event.from_user.id
         self._category = category
 
-        if isinstance(request, types.CallbackQuery):
+        if isinstance(event, QUERY):
             self._require_keyboard = True
-            self._message = request.message
+            self._message = event.message
         else:
-            self._message = request
+            self._message = event
 
         self._chat = self._message.chat
 
@@ -34,7 +28,7 @@ class PictureRequest:
         await save_chat(self._chat)
 
         if required_join_chat_id:
-            invite_link = await get_invite_link(required_join_chat_id)
+            invite_link = await utils.get_invite_link(required_join_chat_id)
             text = texts.ask_to_join_chat.format(invite_link=invite_link)
             await self._message.answer(text)
             return
@@ -59,7 +53,7 @@ class PictureRequest:
         return self._message.answer(text, reply=True)
 
     async def _get_required_join_chat_id(self) -> int | None:
-        if self._chat.type != ChatType.PRIVATE:
+        if self._chat.type != CHAT_TYPES.PRIVATE:
             return None
 
         required_chat_id = await api.required_join.get_chat_id()
@@ -90,14 +84,14 @@ class Response:
         await api.user(self._user_id).cooldown.set()
 
         if self._require_keyboard:
-            await answer(self._message, texts.picture_menu_hint, keyboards.picture_menu)
+            await utils.answer(self._message, texts.picture_menu_hint, keyboards.picture_menu)
             await api.user(self._user_id).picture_category.set(self._category)
 
     async def _send_picture(self):
         photo_ids = self._picture
 
         if len(photo_ids) > 1:
-            media = [types.InputMediaPhoto(i) for i in photo_ids]
+            media = [InputMediaPhoto(i) for i in photo_ids]
             await self._message.answer_media_group(media)
         else:
             await self._message.answer_photo(photo_ids[0])

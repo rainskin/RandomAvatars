@@ -1,31 +1,6 @@
-from core.constants import *
-
-import config
-from assets import commands, PictureCategory
+from core import *
 from .api import api
 
 
 def save_chat(chat: CHAT):
     return api.chats.save(chat.id)
-
-
-def is_admin(user: USER) -> bool:
-    return user.id in config.ADMIN_IDS
-
-
-def contain_trigger_words(text: str, trigger_words: list[str]) -> bool:
-    text_words = text.split()
-
-    for tw in trigger_words:
-        if tw in text_words:
-            return True
-
-    return False
-
-
-def update_my_commands():
-    return commands.setup()
-
-
-async def get_picture_category(for_user: USER) -> PictureCategory | None:
-    return await api.user(for_user.id).picture_category.get()

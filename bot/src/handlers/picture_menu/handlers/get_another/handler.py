@@ -1,10 +1,14 @@
 from core import BaseHandler
 
-from lib import utils, respond_picture
+from lib import respond_picture, api
 
 
 class Handler(BaseHandler):
 
     async def callback(self):
-        category = await utils.get_picture_category(self.message.from_user)
+        category = await self.get_category()
         await respond_picture(self.message, category)
+
+    def get_category(self):
+        user = api.user(self.message.from_user.id)
+        return user.picture_category.get()

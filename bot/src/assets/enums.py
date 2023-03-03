@@ -1,4 +1,4 @@
-from core import StrEnum
+from enum import StrEnum
 
 
 class PictureCategory(StrEnum):

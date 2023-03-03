@@ -1,37 +1,51 @@
-from . import answers
-from .constants import *
+from .shortcuts import *
 from .keyboards import Keyboard
+from . import utils
 
 
-class BaseHandler:
-    request: REQUEST = None
+class BaseHandler0:
+    event: EVENT = None
     message: MESSAGE = None
     query: QUERY = None
-    text: str = None
-    keyboard: Keyboard = None
+    error: Exception = None
+
+    def __init__(self, event_or_update: EVENT | UPDATE, error: Exception):
+        self.error = error
+
+        if isinstance(event_or_update, UPDATE):
+            self.message = event_or_update.message
+            self.query = event_or_update.callback_query
+            self.event = self.message or self.query
+            return
+
+        self.event = event = event_or_update
+
+        if isinstance(event, QUERY):
+            self.query = event
+        elif isinstance(event, MESSAGE):
+            self.message = event
+
+    def answer(self, text: str, keyboard: Keyboard = None):
+        return utils.answer(self.event, text, keyboard)
+
+    def answer_message(self, text: str, keyboard: Keyboard = None):
+        return utils.answer_message(self.message, text, keyboard)
+
+    def edit_message(self, text: str, keyboard: Keyboard = None):
+        return utils.edit_message(self.query, text, keyboard)
+
+
+class BaseHandler(BaseHandler0):
 
     async def callback(self):
         raise NotImplementedError()
 
-    def __init__(self, request: REQUEST | UPDATE, error: Exception):
-        self.request = request
-        self.error = error
-
-        if isinstance(request, QUERY):
-            self.query = request
-        elif isinstance(request, MESSAGE):
-            self.message = request
-        else:
-            self.message = request.message
-            self.query = request.callback_query
-
-    def answer_or_edit(self, text: str, keyboard: Keyboard = None):
-        return answers.answer_or_edit(self.request, text, keyboard)
-
-    answer = answer_or_edit
+    @classmethod
+    def setup_on(cls, event):
+        event(cls._handle)
 
     @classmethod
-    async def _handle(cls, request: REQUEST, error: Exception = None):
+    async def _handle(cls, request: EVENT, error: Exception = None):
         handler = cls(request, error)
         result = await handler.callback()
 
@@ -39,7 +53,3 @@ class BaseHandler:
             await handler.query.answer()
 
         return result
-
-    @classmethod
-    def setup(cls, event):
-        event(cls._handle)

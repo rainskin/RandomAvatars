@@ -6,7 +6,8 @@ __all__ = [
     'QUERY',
     'USER',
     'CHAT',
-    'REQUEST',
+    'EVENT',
+    'CHAT_TYPES',
 ]
 
 UPDATE = types.Update
@@ -14,4 +15,5 @@ MESSAGE = types.Message
 QUERY = types.CallbackQuery
 USER = types.User
 CHAT = types.Chat
-REQUEST = MESSAGE | QUERY
+EVENT = MESSAGE | QUERY
+CHAT_TYPES = types.ChatType

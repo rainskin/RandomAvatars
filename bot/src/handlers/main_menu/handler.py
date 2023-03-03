@@ -1,9 +1,9 @@
 from core import BaseHandler
 
-from lib import on_any_request
+from lib import on_text
 
 
 class Handler(BaseHandler):
 
     async def callback(self):
-        await on_any_request(self.request)
+        await on_text(self.event)

@@ -1,8 +1,10 @@
 from aiogram.types import ChatType
-from core import BaseHandler, utils
 
-from lib import is_admin, update_my_commands, save_chat, send_main_menu
-from .assets import group_text
+import config
+from core import BaseHandler, utils
+from lib import save_chat, send_main_menu
+from .assets import group_welcome_text
+from .lib import update_my_commands
 
 
 class Handler(BaseHandler):
@@ -11,7 +13,7 @@ class Handler(BaseHandler):
         await utils.reset_state()
         await self._answer()
 
-        if is_admin(self.message.from_user):
+        if self.is_user_admin():
             await update_my_commands()
 
         await save_chat(self.message.chat)
@@ -19,4 +21,7 @@ class Handler(BaseHandler):
     def _answer(self):
         if self.message.chat.type == ChatType.PRIVATE:
             return send_main_menu(self.message)
-        return self.answer(group_text)
+        return self.answer(group_welcome_text)
+
+    def is_user_admin(self):
+        return self.message.from_user.id in config.ADMIN_IDS

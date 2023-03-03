@@ -1,9 +1,9 @@
 import asyncio
 from dataclasses import dataclass
 
-from aiogram.utils.exceptions import RetryAfter, TelegramAPIError
-from core import *
+from aiogram.utils.exceptions import RetryAfter
 
+from core import *
 from lib import api
 
 

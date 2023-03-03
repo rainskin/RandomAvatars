@@ -1,7 +1,7 @@
 from core import dp
 from core.keyboards import ReplyKeyboard
 
-from lib import States
+from assets import STATES
 
 
 class Keyboard(ReplyKeyboard):
@@ -16,6 +16,6 @@ class Keyboard(ReplyKeyboard):
 
 
 event = dp.text()
-state = States.broadcast
+state = STATES.broadcast
 text = 'Hello, world!'
 keyboard = Keyboard()
