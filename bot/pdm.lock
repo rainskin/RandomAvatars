@@ -96,7 +96,7 @@ summary = "Cross-platform colored terminal text."
 
 [[package]]
 name = "core"
-version = "0.1.0"
+version = "0.1.2"
 requires_python = ">=3.10"
 path = "./core"
 summary = ""

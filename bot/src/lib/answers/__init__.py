@@ -14,10 +14,6 @@ def does_not_work(msg: MESSAGE):
     return answer(msg, texts.command_not_work)
 
 
-async def no_send_photo_rights(update: UPDATE):
-    if msg := update.message or update.callback_query.message:
-        with suppress(BadRequest):
-            await answer(msg, texts.no_send_photo_rights)
 
 
 def ask_to_restart_bot(msg: MESSAGE):
