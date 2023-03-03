@@ -6,9 +6,9 @@ from core.answers import answer
 from core.constants import *
 from core.utils import get_invite_link
 
-from assets import keyboards
+from assets import keyboards, texts
 from lib.api import api
-from lib.assets import texts, PictureCategory
+from assets import PictureCategory
 from lib.utils import save_chat
 
 

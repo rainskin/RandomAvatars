@@ -1,5 +1,5 @@
 import config
-from lib.assets import PictureCategory, commands
+from assets import PictureCategory, commands
 from assets import keyboards
 from core.constants import *
 

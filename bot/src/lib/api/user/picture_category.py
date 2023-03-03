@@ -1,5 +1,5 @@
 from core import BaseApi
-from lib.assets import enums
+from assets import enums
 
 
 class PictureCategory(BaseApi):

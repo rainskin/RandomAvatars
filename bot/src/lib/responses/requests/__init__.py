@@ -1,4 +1,4 @@
-from lib.assets import PictureCategory
+from assets import PictureCategory
 from .picture_category_picker import PictureCategoryPicker
 from .picture_request import PictureRequest
 from core.constants import *

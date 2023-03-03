@@ -1,5 +1,5 @@
 from core import dp
-from lib import States
+from assets import STATES
 
-event = dp.any_message(state=States.broadcast)
+event = dp.any_message(state=STATES.broadcast)
 text = 'Начинаю рассылку..'

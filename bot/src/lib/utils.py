@@ -1,14 +1,8 @@
-import config
 from core.constants import *
-from core import dp
-from .assets import commands, PictureCategory
+
+import config
+from assets import commands, PictureCategory
 from .api import api
-
-
-async def reset_state():
-    chat = CHAT.get_current()
-    user = USER.get_current()
-    await dp.storage.finish(chat=chat.id, user=user.id)
 
 
 def save_chat(chat: CHAT):
