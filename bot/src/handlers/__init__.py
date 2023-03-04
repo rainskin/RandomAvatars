@@ -1,8 +1,8 @@
-from . import _Start, Admin, Errors, GetCommands, SendPicture, TextMessage
+from . import Start, Admin, Errors, GetCommands, SendPicture, TextMessage
 
 
 def setup():
-    _Start.setup()
+    Start.setup()
     Admin.setup()
     GetCommands.setup()
     SendPicture.setup()
