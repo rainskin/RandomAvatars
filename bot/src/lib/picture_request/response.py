@@ -1,6 +1,6 @@
 from aiogram.types import InputMediaPhoto
 
-from assets import PictureCategory, keyboards, texts
+from assets import PictureCategory
 from core import *
 from ..api import api
 
@@ -12,21 +12,16 @@ class Response:
             message: MESSAGE,
             user_id: int,
             category: PictureCategory,
-            require_keyboard: bool,
     ):
         self._picture = picture
         self._message = message
         self._user_id = user_id
         self._category = category
-        self._require_keyboard = require_keyboard
 
-    async def send(self):
+    async def send(self) -> bool:
         await self._send_picture()
         await api.user(self._user_id).cooldown.set()
-
-        if self._require_keyboard:
-            await utils.answer(self._message, texts.picture_menu_hint, keyboards.picture_menu)
-            await api.user(self._user_id).picture_category.set(self._category)
+        return True
 
     async def _send_picture(self):
         photo_ids = self._picture

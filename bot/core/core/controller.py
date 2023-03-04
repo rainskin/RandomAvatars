@@ -1,5 +1,5 @@
 from .shortcuts import *
-from .keyboards import Keyboard
+from .keyboards import BaseKeyboard
 from . import utils
 
 
@@ -25,13 +25,13 @@ class BaseController0:
         elif isinstance(event, MESSAGE):
             self.message = event
 
-    def answer(self, text: str, keyboard: Keyboard = None):
+    def answer(self, text: str, keyboard: BaseKeyboard = None):
         return utils.answer(self.event, text, keyboard)
 
-    def answer_message(self, text: str, keyboard: Keyboard = None):
+    def answer_message(self, text: str, keyboard: BaseKeyboard = None):
         return utils.answer_message(self.message, text, keyboard)
 
-    def edit_message(self, text: str, keyboard: Keyboard = None):
+    def edit_message(self, text: str, keyboard: BaseKeyboard = None):
         return utils.edit_message(self.query, text, keyboard)
 
 

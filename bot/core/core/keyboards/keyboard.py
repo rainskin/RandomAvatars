@@ -10,7 +10,7 @@ RawKeyboardT = TypeVar('RawKeyboardT', ReplyKeyboardMarkup, InlineKeyboardMarkup
 RawButtonT = TypeVar('RawButtonT', InlineKeyboardButton, KeyboardButton)
 
 
-class Keyboard(ABC, Generic[RawKeyboardT]):
+class BaseKeyboard(ABC, Generic[RawKeyboardT]):
     _raw: RawKeyboardT = None
 
     @abstractmethod

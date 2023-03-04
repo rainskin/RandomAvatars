@@ -1,9 +1,9 @@
 from aiogram.types import ReplyKeyboardRemove
 
-from .keyboard import Keyboard
+from .keyboard import BaseKeyboard
 
 
-class RemovedKeyboard(Keyboard[ReplyKeyboardRemove]):
+class RemovedKeyboard(BaseKeyboard[ReplyKeyboardRemove]):
     _raw = ReplyKeyboardRemove()
 
     def create(self) -> ReplyKeyboardRemove:

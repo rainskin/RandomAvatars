@@ -1,4 +1,4 @@
 from core import dp
-from assets.keyboards import PictureMenu
+from ... import assets as main_menu
 
-event = dp.click(PictureMenu.get_another)
+event = dp.click(main_menu.PictureMenu.get_another)

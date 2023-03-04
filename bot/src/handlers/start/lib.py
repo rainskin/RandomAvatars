@@ -1,6 +1,7 @@
 import config
-from assets import commands, keyboards, texts
+from assets import commands
 from core import *
+from .assets import welcome_text, MainMenu
 
 
 async def update_my_commands():
@@ -13,7 +14,7 @@ async def update_my_commands():
 
 
 async def send_main_menu(msg: MESSAGE):
-    text = texts.welcome.format(mention=msg.from_user.get_mention())
+    text = welcome_text.format(mention=msg.from_user.get_mention())
     startgroup_url = await get_startgroup_link('0')
-    kb = keyboards.MainMenu(startgroup_url)
+    kb = MainMenu(startgroup_url)
     await utils.answer(msg, text, kb)

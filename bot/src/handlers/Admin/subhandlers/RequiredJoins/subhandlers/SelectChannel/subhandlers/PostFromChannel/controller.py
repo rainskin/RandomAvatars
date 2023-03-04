@@ -1,6 +1,4 @@
-from aiogram.utils.exceptions import TelegramAPIError
-from core import utils, BaseController
-
+from core import *
 from lib import api
 from .assets import rights_error_text, forward_error_text, success_text
 

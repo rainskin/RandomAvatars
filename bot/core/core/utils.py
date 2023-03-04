@@ -1,5 +1,5 @@
 from .dispatcher import dp, bot
-from .keyboards import Keyboard
+from .keyboards import BaseKeyboard
 from .shortcuts import *
 
 
@@ -18,17 +18,17 @@ def reset_state():
     return dp.storage.finish(chat=chat.id, user=user.id)
 
 
-def answer(event: EVENT, text: str, keyboard: Keyboard = None):
+def answer(event: EVENT, text: str, keyboard: BaseKeyboard = None):
     if isinstance(event, MESSAGE):
         return answer_message(event, text, keyboard)
     return edit_message(event, text, keyboard)
 
 
-def answer_message(msg: MESSAGE, text: str, keyboard: Keyboard = None):
+def answer_message(msg: MESSAGE, text: str, keyboard: BaseKeyboard = None):
     reply_markup = keyboard.create() if keyboard else None
     return msg.answer(text, reply_markup=reply_markup)
 
 
-def edit_message(query: QUERY, text: str, keyboard: Keyboard = None):
+def edit_message(query: QUERY, text: str, keyboard: BaseKeyboard = None):
     reply_markup = keyboard.create() if keyboard else None
     return query.message.edit_text(text, reply_markup=reply_markup)

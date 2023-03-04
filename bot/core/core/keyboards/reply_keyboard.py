@@ -1,9 +1,9 @@
 from aiogram.types import ReplyKeyboardMarkup
 
-from .keyboard import Keyboard
+from .keyboard import BaseKeyboard
 
 
-class ReplyKeyboard(Keyboard[ReplyKeyboardMarkup]):
+class ReplyKeyboard(BaseKeyboard[ReplyKeyboardMarkup]):
     def __new__(cls, *args, **kwargs):
         obj = super().__new__(cls)
         obj._raw = ReplyKeyboardMarkup(resize_keyboard=True)

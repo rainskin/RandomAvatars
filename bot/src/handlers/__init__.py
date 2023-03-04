@@ -4,4 +4,4 @@ def setup():
     from . import GetCommands
     from . import SendPicture
     from . import TextMessage
-    from . import Error
+    from . import Errors

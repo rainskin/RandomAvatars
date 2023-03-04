@@ -19,34 +19,26 @@ class PictureRequest:
             user: USER,
             message: MESSAGE,
             category: PictureCategory,
-            require_keyboard=False,
     ):
         self._user_id = user.id
         self._message = message
         self._category = category
-        self._require_keyboard = require_keyboard
         self._chat = self._message.chat
 
-    async def respond(self):
+    async def respond(self) -> bool:
         await save_chat(self._chat)
 
         if chat_id := await RequiredJoin(self._chat, self._user_id).get_chat_id():
             await self._ask_to_join_chat(chat_id)
-            return
+            return False
 
         if cooldown := await api.user(self._user_id).cooldown.get(self._chat.type):
             await self._ask_wait(cooldown)
-            return
+            return False
 
         picture = await api.pictures(self._category).get_random(self._chat.id)
-        resp = Response(
-            picture,
-            self._message,
-            self._user_id,
-            self._category,
-            self._require_keyboard,
-        )
-        await resp.send()
+        resp = Response(picture, self._message, self._user_id, self._category)
+        return await resp.send()
 
     async def _ask_to_join_chat(self, chat_id: int):
         invite_link = await utils.get_invite_link(chat_id)

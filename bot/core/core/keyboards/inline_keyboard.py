@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from .keyboard import Keyboard, Button
+from .keyboard import BaseKeyboard, Button
 
 
-class InlineKeyboard(Keyboard[InlineKeyboardMarkup]):
+class InlineKeyboard(BaseKeyboard[InlineKeyboardMarkup]):
     def __new__(cls, *args, **kwargs):
         obj = super().__new__(cls)
         obj._raw = InlineKeyboardMarkup()
