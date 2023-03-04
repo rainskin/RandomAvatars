@@ -1,5 +1,5 @@
 from assets import commands, PictureCategory
-from core import dp
+from core import *
 
 COMMAND_TO_CATEGORY = {
     commands.GET_AVATARS: PictureCategory.AVATAR,

@@ -1,3 +1,3 @@
-from core import dp
+from core import *
 
 event = dp.text()

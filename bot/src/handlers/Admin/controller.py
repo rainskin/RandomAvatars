@@ -1,9 +1,9 @@
-from core import BaseController
+from core import *
 
-from .assets import menu_text, main_keyboard
+from .assets import text, main_keyboard
 
 
 class Controller(BaseController):
 
     async def callback(self):
-        await self.answer(menu_text, main_keyboard)
+        await self.answer(text, main_keyboard)

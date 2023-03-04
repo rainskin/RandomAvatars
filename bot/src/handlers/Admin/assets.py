@@ -1,7 +1,6 @@
 import config
 from assets import commands
-from core import dp
-from core.keyboards import InlineKeyboard, CallbackButton
+from core import *
 
 BACK_BUTTON = CallbackButton('🔙 Назад')
 
@@ -25,5 +24,5 @@ class CancelKeyboard(InlineKeyboard):
 
 main_keyboard = MainKeyboard()
 cancel_keyboard = CancelKeyboard()
-menu_text = 'Вот твоя админ-панель, хозяин 🥵'
+text = 'Вот твоя админ-панель, хозяин 🥵'
 event = dp.command(commands.ADMIN, user_id=config.ADMIN_IDS)

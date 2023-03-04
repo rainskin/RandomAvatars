@@ -1,6 +1,5 @@
 from aiogram.types import InputMediaPhoto
 
-from assets import PictureCategory
 from core import *
 from ..api import api
 
@@ -11,12 +10,10 @@ class Response:
             picture: list[str],
             message: MESSAGE,
             user_id: int,
-            category: PictureCategory,
     ):
         self._picture = picture
         self._message = message
         self._user_id = user_id
-        self._category = category
 
     async def send(self) -> bool:
         await self._send_picture()

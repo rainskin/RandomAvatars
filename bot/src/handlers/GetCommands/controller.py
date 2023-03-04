@@ -1,6 +1,6 @@
-from core import BaseController
-
-from .lib import pick_category, on_picture_request
+from core import *
+from lib import on_picture_request
+from .lib import pick_category
 
 
 class Controller(BaseController):

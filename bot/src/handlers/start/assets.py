@@ -1,6 +1,5 @@
 from assets import commands
 from core import *
-from core.keyboards import *
 
 event = dp.command(commands.START, state='*')
 
@@ -23,7 +22,7 @@ group_welcome_text = f"""
 """
 
 
-class MainMenu(InlineKeyboard):
+class Keyboard(InlineKeyboard):
     add_to_chat = UrlButton('💬 Добавить в чат', '{startgroup_url}')
     anime_avatars = CallbackButton('⛩ Аниме авы')
     paired_avatars = CallbackButton('🎎 Парные аватарки')

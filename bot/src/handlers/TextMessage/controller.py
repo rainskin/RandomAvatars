@@ -1,4 +1,4 @@
-from core import BaseController
+from core import *
 from lib import on_picture_request
 from .lib import pick_category
 

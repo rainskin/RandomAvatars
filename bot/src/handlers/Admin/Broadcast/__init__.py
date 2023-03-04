@@ -1,8 +1,8 @@
-from . import MainMenu
+from . import Post
 from .assets import event
 from .controller import Controller
 
 
 def setup():
     Controller.setup_on(event)
-    MainMenu.setup()
+    Post.setup()
