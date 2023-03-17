@@ -10,6 +10,6 @@ class MainMenu(handlers.PictureRequest):
         button = self.query.data
         return lib.Start.CATEGORY_BY_BUTTON[button]
 
-    async def on_success(self):
+    async def post_reply(self):
         await self.reply(text, Keyboard)
         await api.user(self.user.id).picture_category.set(self.category)

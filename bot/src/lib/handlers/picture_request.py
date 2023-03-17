@@ -9,19 +9,19 @@ class PictureRequest(handlers.Query):
     def pick_category(self) -> PictureCategory | None:
         raise NotImplementedError()
 
-    async def on_success(self):
+    async def post_reply(self):
         pass
 
     async def callback(self):
         await save_chat(self.chat)
-        self.category = self.pick_category()
 
-        if not self.category:
+        if not (category := self.pick_category()):
             return
 
+        self.category = category
         await self._check_rights()
         await self._reply_picture()
-        await self.on_success()
+        await self.post_reply()
 
     async def _check_rights(self):
         await self.check_cooldown()
@@ -34,18 +34,14 @@ class PictureRequest(handlers.Query):
         await set_cooldown(self.user)
 
     async def check_cooldown(self):
-        cooldown = await get_cooldown(self.user, self.chat)
-
-        if not cooldown:
+        if not (cooldown := await get_cooldown(self.user, self.chat)):
             return
 
         text = Texts.wait.format(cooldown)
         await self.cancel(text)
 
     async def check_required_join(self):
-        chat_id = await get_required_join()
-
-        if not chat_id:
+        if not (chat_id := await get_required_join()):
             return
 
         if await self.is_chat_member(chat_id):
