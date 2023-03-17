@@ -1,9 +1,11 @@
+from abc import ABC
+
 from core import handlers
 from lib.assets import PictureCategory, Texts
 from lib.helpers import set_cooldown, save_chat, get_cooldown, get_picture, get_required_join
 
 
-class PictureRequest(handlers.Query):
+class PictureRequest(handlers.Handler, ABC):
     category: PictureCategory = None
 
     def set_category(self):

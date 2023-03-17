@@ -1,10 +1,11 @@
 import lib
-from lib import handlers
+from core import handlers
 from lib.MainMenu import text, Keyboard
+from lib.handlers import PictureRequest
 from lib.helpers import save_picture_category
 
 
-class MainMenu(handlers.PictureRequest):
+class MainMenu(PictureRequest, handlers.Query):
     button = lib.Start.Keyboard.buttons
 
     def set_category(self):
