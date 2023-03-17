@@ -24,23 +24,23 @@ class PictureRequest(handlers.Query):
         await self.post_reply()
 
     async def _check_rights(self):
-        await self.check_cooldown()
+        await self._check_cooldown()
         if self.is_chat_private:
-            await self.check_required_join()
+            await self._check_required_join()
 
     async def _reply_picture(self):
         picture = await get_picture(self.category, self.chat)
         await self.reply_photos(picture)
         await set_cooldown(self.user)
 
-    async def check_cooldown(self):
+    async def _check_cooldown(self):
         if not (cooldown := await get_cooldown(self.user, self.chat)):
             return
 
         text = Texts.wait.format(cooldown)
         await self.cancel(text)
 
-    async def check_required_join(self):
+    async def _check_required_join(self):
         if not (chat_id := await get_required_join()):
             return
 
