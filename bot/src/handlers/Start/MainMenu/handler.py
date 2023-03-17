@@ -1,6 +1,6 @@
 import lib
 from lib import api, handlers
-from lib.MainMenu import Texts, Keyboard
+from lib.MainMenu import text, Keyboard
 
 
 class MainMenu(handlers.PictureRequest):
@@ -11,5 +11,5 @@ class MainMenu(handlers.PictureRequest):
         return lib.Start.CATEGORY_BY_BUTTON[button]
 
     async def on_success(self):
-        await self.reply(Texts.menu_hint, Keyboard)
+        await self.reply(text, Keyboard)
         await api.user(self.user.id).picture_category.set(self.category)

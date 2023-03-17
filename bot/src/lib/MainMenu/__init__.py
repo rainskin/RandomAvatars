@@ -1,1 +1,1 @@
-from .assets import Texts, Keyboard
+from .assets import text, Keyboard
