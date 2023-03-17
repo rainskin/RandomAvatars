@@ -1,5 +1,5 @@
 import config
-from assets import PictureCategory
+from lib.assets import PictureCategory
 from .chats import Chats
 from .pictures import Pictures
 from .required_join import RequiredJoin

@@ -1,8 +1,8 @@
+from core import Handlers
 from . import MainMenu
-from .assets import event
-from .controller import Controller
+from .handler import Start
 
-
-def setup():
-    Controller.setup_on(event)
-    MainMenu.setup()
+HANDLERS = Handlers(
+    Start,
+    MainMenu.HANDLERS,
+)

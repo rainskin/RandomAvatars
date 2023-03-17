@@ -1,8 +1,7 @@
-from core import env
+import os
 
 ADMIN_IDS = [724477101, 936845322]
-
-API_BASE_URL = env.get('API_BASE_URL')
+API_BASE_URL = os.environ['API_BASE_URL']
 
 
 class TriggerWords:  # lowercase!

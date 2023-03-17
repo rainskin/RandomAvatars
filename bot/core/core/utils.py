@@ -1,4 +1,4 @@
-from .dispatcher import dp, bot
+from .dispatcher import bot
 from .keyboards import BaseKeyboard
 from .shortcuts import *
 
@@ -10,12 +10,6 @@ async def get_invite_link(chat_id: int) -> str:
         chat.invite_link = await chat.create_invite_link()
 
     return chat.invite_link
-
-
-def reset_state():
-    chat = CHAT.get_current()
-    user = USER.get_current()
-    return dp.storage.finish(chat=chat.id, user=user.id)
 
 
 def answer(event: EVENT, text: str, keyboard: BaseKeyboard = None):

@@ -1,16 +1,18 @@
-from .shortcuts import *
-from .keyboards import BaseKeyboard
+from aiogram.dispatcher import FSMContext
+
 from . import utils
+from .keyboards import BaseKeyboard
+from .shortcuts import *
 
 
 class BaseController0:
     event: EVENT = None
     message: MESSAGE = None
     query: QUERY = None
-    error: Exception = None
 
-    def __init__(self, event_or_update: EVENT | UPDATE, error: Exception):
+    def __init__(self, event_or_update: EVENT | UPDATE, error: Exception, state: FSMContext):
         self.error = error
+        self.state = state
 
         if isinstance(event_or_update, UPDATE):
             self.message = event_or_update.message
@@ -45,8 +47,8 @@ class BaseController(BaseController0):
         event(cls._handle)
 
     @classmethod
-    async def _handle(cls, request: EVENT, error: Exception = None):
-        handler = cls(request, error)
+    async def _handle(cls, request: EVENT, error: Exception = None, state: FSMContext = None):
+        handler = cls(request, error, state)
         result = await handler.callback()
 
         if handler.query:

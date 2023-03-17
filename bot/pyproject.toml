@@ -4,7 +4,7 @@ version = ""
 description = ""
 authors = []
 dependencies = [
-    "core @ file:///${PROJECT_ROOT}/core",
+    "python-telegram-bot>=20.1",
 ]
 requires-python = ">=3.11"
 license = { text = "MIT" }

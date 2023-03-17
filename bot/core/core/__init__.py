@@ -13,6 +13,7 @@ from .dispatcher import dp
 from .env import env
 from .keyboards import *
 from .shortcuts import *
+from .storage import BaseStorage
 
 __all__ = [
     'env',
@@ -46,4 +47,5 @@ __all__ = [
     'BaseKeyboard',
     'RemovedKeyboard',
     'ReplyKeyboard',
+    'BaseStorage',
 ]

@@ -1,9 +1,4 @@
-from . import GetAnother, MainMenu
-from .assets import event
-from .controller import Controller
+from core import Handlers
+from .handler import MainMenu
 
-
-def setup():
-    Controller.setup_on(event)
-    GetAnother.setup()
-    MainMenu.setup()
+HANDLERS = Handlers(MainMenu)

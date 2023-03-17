@@ -1,10 +1,6 @@
-from . import Start, Admin, Errors, GetCommands, SendPicture, TextMessage
+from core import Handlers
+from . import Start
 
-
-def setup():
-    Start.setup()
-    Admin.setup()
-    GetCommands.setup()
-    SendPicture.setup()
-    TextMessage.setup()
-    Errors.setup()
+HANDLERS = Handlers(
+    Start.HANDLERS,
+)

@@ -1,5 +1,5 @@
 from core import BaseApi
-from assets import enums
+from lib import assets
 
 
 class PictureCategory(BaseApi):
@@ -9,7 +9,7 @@ class PictureCategory(BaseApi):
             endpoint=f'/{user_id}',
         )
 
-    def set(self, user_id: int, category: enums.PictureCategory) -> bool:
+    def set(self, user_id: int, category: assets.PictureCategory) -> bool:
         return self._set(
             endpoint=f'/{user_id}',
             params={'category': category},

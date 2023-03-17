@@ -1,3 +1,6 @@
+import config
 from core import app
+from handlers import HANDLERS
 
-app.run(skip_updates=True)
+app.add_handlers(HANDLERS)
+app.run(config.ADMIN_IDS)
