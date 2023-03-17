@@ -1,12 +1,12 @@
 from core import handlers
 from lib.assets import PictureCategory, Texts
-from lib.helpers import *
+from lib.helpers import set_cooldown, save_chat, get_cooldown, get_picture, get_required_join
 
 
 class PictureRequest(handlers.Query):
     category: PictureCategory = None
 
-    def pick_category(self) -> PictureCategory | None:
+    def set_category(self):
         raise NotImplementedError()
 
     async def post_reply(self):
@@ -14,11 +14,11 @@ class PictureRequest(handlers.Query):
 
     async def callback(self):
         await save_chat(self.chat)
+        self.set_category()
 
-        if not (category := self.pick_category()):
+        if not self.category:
             return
 
-        self.category = category
         await self._check_rights()
         await self._reply_picture()
         await self.post_reply()

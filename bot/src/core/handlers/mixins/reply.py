@@ -15,15 +15,19 @@ class Reply(Handler, ABC):
     reply_keyboard2: ReplyKeyboard = ...
     next_state: str = None
 
+    async def prepare(self):
+        pass
+
+    async def post(self):
+        pass
+
     @classmethod
     async def handle(cls, update: Update, context: ContextTypes.DEFAULT_TYPE):
         handler = cls(update, context)
         await handler.prepare()
         await handler.callback()
+        await handler.post()
         return handler.next_state
-
-    async def prepare(self):
-        pass
 
     async def callback(self):
         validate_fields(self, 'reply_text')

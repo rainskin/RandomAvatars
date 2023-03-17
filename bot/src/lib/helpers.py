@@ -1,14 +1,7 @@
 from telegram import Chat, User
 
 from .api import api
-
-___all__ = [
-    'save_chat',
-    'get_cooldown',
-    'get_picture',
-    'set_cooldown',
-    'get_required_join',
-]
+from .assets import PictureCategory
 
 
 def save_chat(chat: Chat):
@@ -29,3 +22,7 @@ def set_cooldown(user: User):
 
 async def get_required_join() -> int:
     return await api.required_join.get_chat_id()
+
+
+def save_picture_category(user: User, category: PictureCategory):
+    return api.user(user.id).picture_category.set(category)

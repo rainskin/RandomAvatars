@@ -47,7 +47,7 @@ class Handler(layer1.Handler, ABC):
         await self.reply(text, keyboard)
         raise ApplicationHandlerStop()
 
-    async def set_commands(self, commands: list[BotCommand], chat_id: int = None):
+    async def set_my_commands(self, commands: list[BotCommand], chat_id: int = None):
         scope = BotCommandScopeChat(chat_id) if chat_id else None
         try:
             await self.bot.set_my_commands(commands, scope)
@@ -99,6 +99,15 @@ class Handler(layer1.Handler, ABC):
         return self.chat.type in [self.chat.GROUP, self.chat.SUPERGROUP]
 
     @property
+    def admin_ids(self) -> list[int]:
+        return self.context.bot_data.get('admin_ids', [])
+
+    @property
     def is_user_admin(self) -> bool:
-        admin_ids = self.context.bot_data['admin_ids']
-        return self.user.id in admin_ids
+        return self.user.id in self.admin_ids
+
+    async def set_commands(self, for_users: list[BotCommand], for_admins: list[BotCommand]):
+        await self.set_my_commands(for_users)
+
+        for admin_id in self.admin_ids:
+            await self.set_my_commands(for_admins, admin_id)

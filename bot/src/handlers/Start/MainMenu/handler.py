@@ -1,15 +1,16 @@
 import lib
-from lib import api, handlers
+from lib import handlers
 from lib.MainMenu import text, Keyboard
+from lib.helpers import save_picture_category
 
 
 class MainMenu(handlers.PictureRequest):
     button = lib.Start.Keyboard.buttons
 
-    def pick_category(self):
+    def set_category(self):
         button = self.query.data
-        return lib.Start.CATEGORY_BY_BUTTON[button]
+        self.category = lib.Start.CATEGORY_BY_BUTTON[button]
 
     async def post_reply(self):
         await self.reply(text, Keyboard)
-        await api.user(self.user.id).picture_category.set(self.category)
+        await save_picture_category(self.user, self.category)
