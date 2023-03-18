@@ -1,13 +1,13 @@
 from telegram import ext
 
+from core.helpers import listify
 from . import mixins
 from .helpers import get_reply_markup
 from .types import AnyInlineKeyboard
-from core.helpers import listify
 
 
 class Query(mixins.Reply):
-    button: str | list[str] = None
+    trigger: str | list[str] = None
     edit_text: str = None
     edit_keyboard: AnyInlineKeyboard = ...
 
@@ -17,8 +17,8 @@ class Query(mixins.Reply):
 
     @classmethod
     def _pattern(cls, callback_data: str | object) -> bool:
-        buttons = listify(cls.button)
-        return callback_data in buttons
+        triggers = listify(cls.trigger)
+        return callback_data in triggers
 
     async def callback(self):
         if self.edit_text:

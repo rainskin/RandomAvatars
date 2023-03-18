@@ -24,4 +24,8 @@ class Handler(layer2.Handler, ABC):
         await handler.prepare()
         await handler.callback()
         await handler.post()
+
+        if handler.query:
+            await handler.answer()
+
         return handler.next_state

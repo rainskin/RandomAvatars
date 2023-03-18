@@ -35,11 +35,3 @@ class Keyboard(keyboards.Inline):
     def __init__(self, startgroup_url: str):
         button = self.ADD_TO_CHAT.format(startgroup_url)
         self.buttons = self.buttons + [button]
-
-
-CATEGORY_BY_BUTTON = {
-    Keyboard.ANIME_AVATARS: PictureCategory.AVATAR,
-    Keyboard.PAIRED_AVATARS: PictureCategory.PAIRED_AVATARS,
-    Keyboard.CUTE_PICTURES: PictureCategory.CUTE,
-    Keyboard.ANGRY_PICTURES: PictureCategory.ANGRY,
-}

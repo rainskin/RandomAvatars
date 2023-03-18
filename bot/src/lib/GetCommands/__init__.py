@@ -1,1 +1,1 @@
-from .assets import CATEGORY_BY_COMMAND
+from .assets import CATEGORY_BY_TRIGGER

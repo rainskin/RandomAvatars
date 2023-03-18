@@ -119,3 +119,6 @@ class Handler(layer1.Handler, ABC):
 
         if text.startswith(prefix):
             return text.removeprefix(prefix).split('@')[0]
+
+    def answer(self, text: str = None, show_alert: bool = False):
+        return self.query.answer(text, show_alert)
