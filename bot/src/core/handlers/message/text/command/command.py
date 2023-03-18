@@ -4,9 +4,9 @@ from ..text import Text
 
 
 class Command(Text):
-    command: str
+    trigger: str | list[str]
 
     @classmethod
     def build(cls):
         cls.validate_fields('command')
-        return ext.CommandHandler(cls.command, cls.handle, Text.filters)
+        return ext.CommandHandler(cls.trigger, cls.handle, Text.filters)

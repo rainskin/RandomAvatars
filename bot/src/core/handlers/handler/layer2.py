@@ -111,3 +111,11 @@ class Handler(layer1.Handler, ABC):
 
         for admin_id in self.admin_ids:
             await self.set_my_commands(for_admins, admin_id)
+
+    @property
+    def command(self) -> str | None:
+        prefix = '/'
+        text = self.text
+
+        if text.startswith(prefix):
+            return text.removeprefix(prefix).split('@')[0]
