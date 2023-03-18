@@ -1,2 +1,2 @@
-from .main_menu import MainMenu
+from .menu_request import MenuRequest
 from .picture_request import PictureRequest

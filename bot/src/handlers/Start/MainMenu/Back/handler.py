@@ -1,6 +1,6 @@
 import lib
-from lib.handlers import MainMenu
+from lib.handlers import MenuRequest
 
 
-class Back(MainMenu):
+class Back(MenuRequest):
     trigger = lib.MainMenu.Keyboard.BACK

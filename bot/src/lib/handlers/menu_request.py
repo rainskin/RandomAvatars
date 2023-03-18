@@ -2,7 +2,7 @@ from core import handlers
 from lib.Start import Texts, Keyboard
 
 
-class MainMenu(handlers.Text):
+class MenuRequest(handlers.Text):
 
     async def prepare(self):
         if self.is_chat_private:
