@@ -6,5 +6,5 @@ from lib.handlers import PictureRequest
 class GetCommands(PictureRequest, handlers.Command):
     trigger = list(CATEGORY_BY_TRIGGER)
 
-    def set_category(self):
+    async def set_category(self):
         self.category = CATEGORY_BY_TRIGGER[self.command]

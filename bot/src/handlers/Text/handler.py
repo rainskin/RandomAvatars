@@ -5,7 +5,7 @@ from lib.handlers import PictureRequest
 
 class Text(PictureRequest, handlers.Text):
 
-    def set_category(self):
+    async def set_category(self):
         words = self.text.lower().split()
 
         for triggers, category in TRIGGERS_TO_CATEGORY:

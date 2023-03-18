@@ -8,7 +8,7 @@ from lib.helpers import save_picture_category
 class MainMenu(PictureRequest, handlers.Query):
     trigger = lib.Start.Keyboard.buttons
 
-    def set_category(self):
+    async def set_category(self):
         button = self.query.data
         self.category = CATEGORY_BY_TRIGGER[button]
 

@@ -26,3 +26,7 @@ async def get_required_join() -> int:
 
 def save_picture_category(user: User, category: PictureCategory):
     return api.user(user.id).picture_category.set(category)
+
+
+def get_picture_category(user: User):
+    return api.user(user.id).picture_category.get()

@@ -8,7 +8,7 @@ from lib.helpers import set_cooldown, save_chat, get_cooldown, get_picture, get_
 class PictureRequest(handlers.Handler, ABC):
     category: PictureCategory = None
 
-    def set_category(self):
+    async def set_category(self):
         raise NotImplementedError()
 
     async def post_reply(self):
@@ -16,7 +16,7 @@ class PictureRequest(handlers.Handler, ABC):
 
     async def callback(self):
         await save_chat(self.chat)
-        self.set_category()
+        await self.set_category()
 
         if not self.category:
             return
