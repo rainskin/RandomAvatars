@@ -13,8 +13,8 @@ def pick_category(msg: MESSAGE) -> PictureCategory | None:
 
 
 _TRIGGERS_TO_CATEGORY = [
-    (config.TriggerWords.avatar, PictureCategory.AVATAR),
-    (config.TriggerWords.paired_avatars, PictureCategory.PAIRED_AVATARS),
-    (config.TriggerWords.cute_picture, PictureCategory.CUTE),
-    (config.TriggerWords.angry_picture, PictureCategory.ANGRY),
+    (config.TextTriggers.AVATAR, PictureCategory.AVATAR),
+    (config.TextTriggers.PAIRED_AVATARS, PictureCategory.PAIRED_AVATARS),
+    (config.TextTriggers.CUTE_PICTURE, PictureCategory.CUTE),
+    (config.TextTriggers.ANGRY_PICTURE, PictureCategory.ANGRY),
 ]

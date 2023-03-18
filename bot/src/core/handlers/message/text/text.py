@@ -4,12 +4,12 @@ from ..message import Message
 
 
 class Text(Message):
-    button: str | list[str] = None
+    trigger: str | list[str] = None
 
     @classmethod
     def get_filters(cls):
-        if cls.button:
-            text_filter = ext.filters.Text(cls.button)
+        if cls.trigger:
+            text_filter = ext.filters.Text(cls.trigger)
         else:
             text_filter = ext.filters.TEXT
 
