@@ -10,7 +10,7 @@ class Handler(layer2.Handler, ABC):
     next_state: str = None
 
     async def callback(self):
-        raise NotImplementedError()
+        pass
 
     async def prepare(self):
         pass
