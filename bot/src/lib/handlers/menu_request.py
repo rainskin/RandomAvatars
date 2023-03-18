@@ -1,8 +1,8 @@
-from core import handlers
+from core import MessageHandler
 from lib.assets import Texts, MenuKeyboard
 
 
-class MenuRequestHandler(handlers.Message):
+class MenuRequestHandler(MessageHandler):
 
     async def prepare(self):
         if self.is_chat_private:
