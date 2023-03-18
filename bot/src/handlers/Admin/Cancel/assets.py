@@ -1,6 +1,6 @@
 from core import dp
 
-from .. import assets as admin
+from lib.Admin import assets as admin
 
 event = dp.click(admin.BACK_BUTTON, state='*')
 text = admin.text

@@ -1,9 +1,9 @@
-from core import handlers
+from core import TextHandler
+from lib import PictureRequestHandler
 from lib.Text import TRIGGERS_TO_CATEGORY
-from lib.handlers import PictureRequest
 
 
-class Text(PictureRequest, handlers.Text):
+class Text(PictureRequestHandler, TextHandler):
 
     async def set_category(self):
         words = self.text.lower().split()

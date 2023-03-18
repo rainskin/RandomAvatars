@@ -1,9 +1,9 @@
-from core import handlers
+from core import CommandHandler
+from lib import PictureRequestHandler
 from lib.GetCommands import CATEGORY_BY_TRIGGER
-from lib.handlers import PictureRequest
 
 
-class GetCommands(PictureRequest, handlers.Command):
+class GetCommands(PictureRequestHandler, CommandHandler):
     trigger = list(CATEGORY_BY_TRIGGER)
 
     async def set_category(self):

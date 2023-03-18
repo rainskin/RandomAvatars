@@ -1,5 +1,4 @@
-from core import *
-from handlers.Admin import assets as admin
+from lib.Admin import assets as admin
 from .. import assets as broadcast
 
 

@@ -5,7 +5,7 @@ from lib.assets import PictureCategory, Texts
 from lib.helpers import set_cooldown, save_chat, get_cooldown, get_picture, get_required_join
 
 
-class PictureRequest(handlers.Handler, ABC):
+class PictureRequestHandler(handlers.Handler, ABC):
     category: PictureCategory = None
 
     async def set_category(self):

@@ -1,10 +1,4 @@
-from . import Broadcast, RequiredJoins, Cancel
-from .assets import event
-from .controller import Controller
+from core import Handlers
+from .handler import Admin
 
-
-def setup():
-    Controller.setup_on(event)
-    Broadcast.setup()
-    RequiredJoins.setup()
-    Cancel.setup()
+HANDLERS = Handlers(Admin)

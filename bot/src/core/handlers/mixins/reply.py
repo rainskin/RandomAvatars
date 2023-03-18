@@ -1,11 +1,9 @@
-from abc import ABC
-
 from core.helpers import validate_fields
-from ..handler import Handler
 from ..types import ReplyKeyboard
+from ..update import UpdateHandler
 
 
-class Reply(Handler, ABC):
+class Reply(UpdateHandler):
     reply_text: str = None
     reply_keyboard: ReplyKeyboard = ...
     reply_text2: str = None

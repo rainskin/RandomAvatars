@@ -1,16 +1,13 @@
-from abc import ABC
+from telegram import Update, ext
 
-from telegram import Update
-from telegram.ext import ContextTypes
-
-from . import layer2
+from .handler import Handler
 
 
-class Handler(layer2.Handler, ABC):
+class UpdateHandler(Handler):
     next_state: str = None
 
     async def callback(self):
-        pass
+        raise NotImplementedError()
 
     async def prepare(self):
         pass
@@ -19,7 +16,7 @@ class Handler(layer2.Handler, ABC):
         pass
 
     @classmethod
-    async def handle(cls, update: Update, context: ContextTypes.DEFAULT_TYPE):
+    async def handle(cls, update: Update, context: ext.ContextTypes.DEFAULT_TYPE):
         handler = cls(update, context)
         await handler.prepare()
         await handler.callback()
@@ -29,3 +26,7 @@ class Handler(layer2.Handler, ABC):
             await handler.answer()
 
         return handler.next_state
+
+    @classmethod
+    def build(cls):
+        return ext.TypeHandler(Update, cls.handle)

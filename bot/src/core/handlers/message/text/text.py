@@ -13,4 +13,4 @@ class Text(Message):
         else:
             text_filter = ext.filters.TEXT
 
-        return cls.filters & text_filter
+        return super().get_filters() & text_filter

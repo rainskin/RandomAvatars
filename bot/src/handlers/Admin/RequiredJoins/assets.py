@@ -1,5 +1,4 @@
-from core import *
-from .. import assets as admin
+from lib.Admin import assets as admin
 
 
 class Keyboard(InlineKeyboard):
@@ -20,4 +19,4 @@ class Texts:
 
 
 keyboard = Keyboard()
-event = dp.click(admin.MainKeyboard.required_join)
+event = dp.click(admin.MenuKeyboard.required_join)

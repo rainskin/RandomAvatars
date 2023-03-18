@@ -1,12 +1,12 @@
 from core import handlers
-from lib.Start import Texts, Keyboard
+from lib.assets import Texts, MenuKeyboard
 
 
-class MenuRequest(handlers.Text):
+class MenuRequestHandler(handlers.Message):
 
     async def prepare(self):
         if self.is_chat_private:
-            self.reply_text = Texts.for_private_chat.format(self.user_mention)
-            self.reply_keyboard = Keyboard(self.startgroup_url)
+            self.reply_text = Texts.private_welcome.format(self.user_mention)
+            self.reply_keyboard = MenuKeyboard(self.startgroup_url)
         else:
-            self.reply_text = Texts.for_group
+            self.reply_text = Texts.group_welcome

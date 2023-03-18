@@ -1,8 +1,8 @@
 from core import Handlers
-from . import MainMenu
+from . import Menu
 from .handler import Start
 
 HANDLERS = Handlers(
     Start,
-    MainMenu.HANDLERS,
+    Menu.HANDLERS,
 )

@@ -1,9 +1,9 @@
 from core import Handlers
 from . import GetAnother, Back
-from .handler import MainMenu
+from .handler import Menu
 
 HANDLERS = Handlers(
-    MainMenu,
+    Menu,
     GetAnother.HANDLERS,
     Back.HANDLERS,
 )

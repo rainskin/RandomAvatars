@@ -1,6 +1,5 @@
 from core import keyboards
-from lib.assets import PictureCategory
-from .. import Start
+from lib.assets import PictureCategory, MenuKeyboard
 
 
 class Keyboard(keyboards.Reply):
@@ -14,8 +13,8 @@ class Keyboard(keyboards.Reply):
 text = '👇 Воспользуйся меню под полем для ввода, чтобы вернуться в меню или получить другую картинку!'
 
 CATEGORY_BY_TRIGGER = {
-    Start.Keyboard.ANIME_AVATARS: PictureCategory.AVATAR,
-    Start.Keyboard.PAIRED_AVATARS: PictureCategory.PAIRED_AVATARS,
-    Start.Keyboard.CUTE_PICTURES: PictureCategory.CUTE,
-    Start.Keyboard.ANGRY_PICTURES: PictureCategory.ANGRY,
+    MenuKeyboard.ANIME_AVATARS: PictureCategory.AVATAR,
+    MenuKeyboard.PAIRED_AVATARS: PictureCategory.PAIRED_AVATARS,
+    MenuKeyboard.CUTE_PICTURES: PictureCategory.CUTE,
+    MenuKeyboard.ANGRY_PICTURES: PictureCategory.ANGRY,
 }
