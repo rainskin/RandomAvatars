@@ -9,3 +9,4 @@ StartHandler = handlers.Start
 QueryHandler = handlers.Query
 InlineKeyboard = keyboards.Inline
 MessageHandler = handlers.Message
+ConversationHandler = handlers.Conversation

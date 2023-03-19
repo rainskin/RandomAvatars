@@ -122,3 +122,11 @@ class Handler(layer1.Handler, ABC):
 
     def answer(self, text: str = None, show_alert: bool = False):
         return self.query.answer(text, show_alert)
+
+    @property
+    def message_id(self) -> int:
+        return self.message.message_id
+
+    def copy(self, chat_id: int = None):
+        chat_id = chat_id or self.chat.id
+        return self.message.copy(chat_id)

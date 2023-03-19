@@ -1,4 +1,4 @@
-from . import Menu
+from . import Menu, Admin, Post
 from .api import api
 from .assets import Texts, MenuKeyboard, PictureCategory
 from .handlers import MenuRequestHandler, PictureRequestHandler

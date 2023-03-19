@@ -4,7 +4,7 @@ from .handler import Handler
 
 
 class UpdateHandler(Handler):
-    next_state: str = None
+    next_state: str | None = ...
 
     async def callback(self):
         raise NotImplementedError()
@@ -25,7 +25,14 @@ class UpdateHandler(Handler):
         if handler.query:
             await handler.answer()
 
-        return handler.next_state
+        next_state = handler.next_state
+
+        if next_state is ...:
+            next_state = None
+        elif next_state is None:
+            next_state = ext.ConversationHandler.END
+
+        return next_state
 
     @classmethod
     def build(cls):

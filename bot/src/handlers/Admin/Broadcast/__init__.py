@@ -1,8 +1,4 @@
-from . import Post
-from .assets import event
-from .controller import Controller
+from core import Handlers
+from .handler import Broadcast
 
-
-def setup():
-    Controller.setup_on(event)
-    Post.setup()
+HANDLERS = Handlers(Broadcast)

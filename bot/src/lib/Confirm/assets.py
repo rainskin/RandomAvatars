@@ -1,7 +1,3 @@
-from core import *
-from .. import assets as post
-
-event = dp.click(post.Keyboard.confirm, state=post.confirm_state)
 text = 'Начинаю рассылку..'
 
 summary_text = """
