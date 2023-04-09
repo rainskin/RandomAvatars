@@ -8,11 +8,13 @@ BACK_BUTTON = CallbackButton('🔙 Назад')
 class MainKeyboard(InlineKeyboard):
     broadcast = CallbackButton('📩 Рассылка')
     required_join = CallbackButton('✅ Обязательная подписка')
+    utm = CallbackButton('🏷 UTM (Рефералы)')
 
     def __init__(self):
         self.add_rows(
             self.broadcast,
             self.required_join,
+            self.utm,
         )
 
 

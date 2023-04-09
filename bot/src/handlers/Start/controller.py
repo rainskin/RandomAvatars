@@ -14,7 +14,8 @@ class Controller(BaseController):
         if self.is_user_admin():
             await update_my_commands()
 
-        await save_chat(self.message.chat)
+        utm = self.message.get_args() or None
+        await save_chat(self.message.chat, utm)
 
     def _answer(self):
         if self.message.chat.type == CHAT_TYPES.PRIVATE:

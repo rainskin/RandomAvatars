@@ -15,8 +15,8 @@ class Database(BaseDatabase):
         return Chat().find_docs()
 
     @staticmethod
-    def save_chat(chat_id: int):
-        Chat.find_doc(id=chat_id) or Chat(id=chat_id).save()
+    def save_chat(chat_id: int, utm: str | None):
+        Chat.find_doc(id=chat_id) or Chat(id=chat_id, utm=utm).save()
 
     @staticmethod
     def save_sent_picture(chat_id: int, picture: Picture):

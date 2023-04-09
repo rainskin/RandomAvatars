@@ -14,6 +14,7 @@ class Picture(Document):
 
 class Chat(Document):
     id: int = me.IntField(primary_key=True)
+    utm: str = me.StringField()
     sent_picture_ids: list[ObjectId] = me.ListField(me.ObjectIdField())
 
     def reset_sent_pictures(self):

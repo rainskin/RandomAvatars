@@ -60,8 +60,8 @@ async def get_chats():
 
 
 @app.post('/chats/{chat_id}')
-async def save_chat(chat_id: int):
-    db.save_chat(chat_id)
+async def save_chat(chat_id: int, utm: str = None):
+    db.save_chat(chat_id, utm or None)
     return OK
 
 
@@ -79,3 +79,12 @@ class RequiredJoinChat(BaseModel):
 async def set_required_join_chat(chat: RequiredJoinChat):
     db.set_required_join_chat(chat.chat_id)
     return OK
+
+
+@app.get('/utm')
+async def get_utm():
+    counter = {}
+    for c in db.get_chats():
+        if c.utm:
+            counter[c.utm] = counter.get(c.utm, 0) + 1
+    return make_response(counter)
