@@ -1,1 +1,1 @@
-docker compose up --build --wait
+docker compose up --build --wait --remove-orphans
