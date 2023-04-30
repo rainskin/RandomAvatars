@@ -1,9 +1,6 @@
 services:
-  bot:
-    build: bot
+  app:
+    build: .
     restart: always
-    env_file: .env
-  api:
-    build: api
-    restart: always
-    env_file: .env
+    environment:
+      TZ: Europe/Moscow
