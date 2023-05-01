@@ -30,8 +30,24 @@ class AdminMenu(InlineKeyboard):
     BROADCAST = CallbackButton("📩 Рассылка")
     REQUIRED_JOIN = CallbackButton("✅ Обязательная подписка")
     UTM = CallbackButton("🏷 UTM (Рефералы)")
+    SIGNS = CallbackButton("✍️ Подписи")
 
-    buttons = [BROADCAST, REQUIRED_JOIN, UTM]
+    buttons = [BROADCAST, REQUIRED_JOIN, UTM, SIGNS]
+
+
+class Signs(InlineKeyboard):
+    ADD = CallbackButton("Добавить подпись")
+    SHOW = CallbackButton("Просмотреть подписи")
+
+    buttons = [ADD, SHOW, BACK_BUTTON]
+
+
+class SignMenu(InlineKeyboard):
+    DELETE = CallbackButton("Удалить", "delete-sign:{id}")
+
+    def __init__(self, sign_id: str):
+        button = self.DELETE.format(id=sign_id)
+        super().__init__(button)
 
 
 class Cancel(InlineKeyboard):
@@ -52,3 +68,4 @@ class RequiredJoin(InlineKeyboard):
 PICTURE_MENU = PictureMenu()
 ADMIN_MENU = AdminMenu()
 CANCEL = Cancel()
+SIGNS = Signs()

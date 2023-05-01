@@ -1,10 +1,10 @@
 from collections import defaultdict
 
 from api.enums import PictureCategory
-from .models import Picture, Chat, User, Setting
+from .models import Picture, Chat, User, Setting, Sign
 
 
-class Database:
+class Database:  # TODO
     def __init__(self):
         self.pictures_by_category: dict[str, list[Picture]] = defaultdict(list)
 

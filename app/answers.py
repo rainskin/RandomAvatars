@@ -1,6 +1,6 @@
 from botty import bot, Message, User, Answer, is_private, bold
 
-from api import Text
+from api import Text, Sign
 from assets import kbs
 
 
@@ -36,6 +36,10 @@ def required_join(invite_link: str | None = None):
     return Answer(text, kbs.RequiredJoin(not invite_link))
 
 
+def sign(s: Sign):
+    return Answer(s.text, kbs.SignMenu(s.str_id))
+
+
 GREET_GROUP = Answer(Text.GREET_GROUP)
 PICTURE_MENU = Answer(Text.PICTURE_MENU_HINT, kbs.PICTURE_MENU)
 DOES_NOT_WORK = Answer(Text.DOES_NOT_WORK)
@@ -47,3 +51,5 @@ ASK_CHANNEL_POST = Answer(Text.ASK_CHANNEL_POST, kbs.CANCEL)
 FORWARD_ERROR = Answer(Text.FORWARD_ERROR)
 RIGHTS_ERROR = Answer(Text.RIGHTS_ERROR)
 ASK_RIGHTS = Answer(Text.ASK_RIGHTS)
+SIGNS = Answer(Text.ADMIN_PANEL, kbs.SIGNS)
+ASK_SIGN = Answer(Text.ASK_SIGN, kbs.CANCEL)

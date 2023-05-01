@@ -1,4 +1,5 @@
 from .config import PICTURE_REQUEST_COOLDOWN, ADMIN_IDS, TriggerWords
+from .database import Sign
 from .enums import Command, PictureCategory, Text
 from .helpers import (
     get_utm,

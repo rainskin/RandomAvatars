@@ -61,3 +61,16 @@ class Setting(Document):
     def set_value(self, value: SettingValue):
         self.value = value
         self.save()
+
+
+class Sign(Document):
+    text: str
+
+    @classmethod
+    def add(cls, text: str):
+        cls(text=text).save()
+
+    @classmethod
+    def remove(cls, _id: str):
+        if doc := cls.get(_id):
+            doc.delete()

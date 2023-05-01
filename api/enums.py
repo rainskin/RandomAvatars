@@ -49,3 +49,5 @@ class Text:
     ASK_CHANNEL_POST = t["askChannelPost"]
     FORWARD_ERROR = t["forwardError"]
     RIGHTS_ERROR = t["rightsError"]
+    ASK_SIGN = "Отправь подпись"
+    NO_SIGNS = "Нет подписей"

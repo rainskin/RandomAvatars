@@ -7,3 +7,7 @@ class BroadcastState(StatesGroup):
 
 class RequiredJoinState(StatesGroup):
     POST = State()
+
+
+class SignState(StatesGroup):
+    SIGN = State()
