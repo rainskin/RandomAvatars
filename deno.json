@@ -1,0 +1,25 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.185.0/",
+    "grammy_app": "https://deno.land/x/grammy_app@v0.2/mod.ts",
+    "grammy_r": "https://deno.land/x/grammy_r@v0.1/mod.ts",
+    "grammy": "https://deno.land/x/grammy@v1.16.0/mod.ts",
+    "tg": "https://deno.land/x/grammy@v1.16.0/types.ts",
+    "api/": "./api/",
+    "deps": "./deps.ts",
+    "lib": "./app/lib/mod.ts",
+    "assets": "./assets/mod.ts",
+    "answers": "./app/answers.ts",
+    "loader": "./app/loader.ts",
+    "types": "./app/types.ts",
+    "handlers": "./app/handlers/mod.ts",
+    "enums": "./api/enums.ts",
+    "$": "./global.ts"
+  },
+  "tasks": {
+    "dev": "deno run --watch -A app/mod.ts"
+  },
+  "fmt": {
+    "semiColons": false
+  }
+}
