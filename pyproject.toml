@@ -1,18 +1,52 @@
+"$schema" = "https://raw.githubusercontent.com/LDmitriy7/schemas/main/p.json"
+
 [project]
-name = "AvatarsBot"
-version = "1.0.0"
+name = ""
+version = ""
 description = ""
 authors = []
-dependencies = ["ext-mongo>=0.4.0", "i-texts>=0.2.0", "aiogram-ext>=0.4.0"]
+dependencies = [
+    "ext-mongo>=0.4.0",
+    "i-texts>=0.2.0",
+    "aiogram-ext>=0.4.0",
+    "fluent-runtime>=0.4.0",
+]
 requires-python = ">=3.11"
 license = { text = "MIT" }
 
-[tool.pdm.scripts._]
-env_file = ".env"
-env = { PYTHONPATH = "." }
+[tool.pdm.dev-dependencies]
+dev = ["pytest>=7.3.1", "pytest-cov>=4.0.0"]
 
 [tool.pdm.scripts]
 start = "python app"
+dev = "python src"
 
 [tool.ruff]
-ignore = ["F401"]
+src = ["src", "tests"]
+select = ["ALL"]
+ignore = [
+    "F401",
+    "D",
+    "S101",
+    "RUF001",
+    "ANN101",
+    "ANN201",
+    "ANN202",
+    "S311",
+    "ANN102",
+    "ANN206",
+    "ANN205",
+]
+line-length = 99
+
+[tool.pyright]
+reportMissingTypeStubs = false
+reportUntypedFunctionDecorator = false
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:pkg_resources is deprecated as an API",
+    "ignore:No uuidRepresentation is specified!",
+    "ignore:loop argument is deprecated",
+]
+pythonpath = ["src"]

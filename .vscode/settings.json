@@ -1,0 +1,23 @@
+{
+  "python.languageServer": "Pylance",
+  "python.analysis.typeCheckingMode": "strict",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__": true,
+    ".pytest_cache": true,
+    ".ruff_cache": true,
+    ".venv": true,
+    ".coverage": true,
+    ".pdm-python": true,
+    "pdm.lock": true,
+    "[!s]*/**": true,
+    "s[!r]*/**": true,
+    "sr[!c]*/**": true
+  },
+  "workspace.isHidden": true
+}
