@@ -18,7 +18,7 @@ license = { text = "MIT" }
 dev = ["pytest>=7.3.1", "pytest-cov>=4.0.0"]
 
 [tool.pdm.scripts]
-start = "python app"
+start = "python src"
 dev = "python src"
 
 [tool.ruff]

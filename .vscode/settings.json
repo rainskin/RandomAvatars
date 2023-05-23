@@ -14,10 +14,7 @@
     ".venv": true,
     ".coverage": true,
     ".pdm-python": true,
-    "pdm.lock": true,
-    "[!s]*/**": true,
-    "s[!r]*/**": true,
-    "sr[!c]*/**": true
+    "pdm.lock": true
   },
   "workspace.isHidden": true
 }
