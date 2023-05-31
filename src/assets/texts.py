@@ -11,8 +11,7 @@ def wait_for(seconds: int):
     return t.get("wait-for", seconds=seconds)
 
 
-def join_required(url: str):
-    return t.get("join-required", url=url)
+join_required = t.get("join-required")
 
 
 def required_join(url: str | None = None):
@@ -56,4 +55,5 @@ forward_error = t.get("forward-error")
 rights_error = t.get("rights-error")
 ask_sign = t.get("ask-sign")
 no_signs = t.get("no-signs")
+no_required_join = t.get("no-required-join")
 select_another_picture = t.get("select-another-picture")

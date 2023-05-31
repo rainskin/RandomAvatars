@@ -2,7 +2,7 @@ from collections import defaultdict
 
 from assets.types import PictureCategory
 
-from .models import Chat, Picture, Setting, User
+from .models import Chat, Picture, User
 
 
 class Database:  # TODO
@@ -45,16 +45,6 @@ class Database:  # TODO
             chat.reset_sent_pictures()
 
         return new_pictures
-
-    @staticmethod
-    def set_required_join_chat(chat_id: int | None) -> None:
-        setting = Setting.get(Setting.REQUIRED_JOIN_CHAT)
-        setting.set_value(chat_id)
-
-    @staticmethod
-    def get_required_join_chat() -> int:
-        setting = Setting.get(Setting.REQUIRED_JOIN_CHAT)
-        return setting.value
 
 
 db = Database()

@@ -47,8 +47,8 @@ def wait_for(seconds: int):
     return Answer(t.wait_for(seconds))
 
 
-def join_required(url: str):
-    return Answer(t.join_required(url))
+def join_required(links: list[str]):
+    return Answer(t.join_required, k.join_required(links))
 
 
 def sign(s: "Sign"):
@@ -65,12 +65,11 @@ def send_picture_info(group_id: int):
     return Answer(t.send_picture_info, kb)
 
 
-def required_join(invite_link: str | None = None):
-    text = t.required_join(invite_link)
-    return Answer(text, k.required_join(disabled=not invite_link))
+def required_join_chat(chat_id: int, invite_link: str):
+    return Answer(invite_link, k.delete_required_join(chat_id))
 
 
-REQUIRED_JOIN = required_join()
+required_join = Answer(t.admin_panel, k.required_join)
 
 
 def reselect_picture(picture: str):

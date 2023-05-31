@@ -74,3 +74,17 @@ class Sign(Document):
     def remove(cls, _id: str):
         if doc := cls.get(_id):
             doc.delete()
+
+
+class RequiredJoin(Document):
+    chat_id: int = me.IntField(primary_key=True)
+    link: str
+
+    @classmethod
+    def add(cls, chat_id: int, link: str):
+        cls(chat_id=chat_id, link=link).save()
+
+    @classmethod
+    def remove(cls, chat_id: int):
+        if doc := cls.get(chat_id):
+            doc.delete()

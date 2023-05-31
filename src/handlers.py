@@ -78,6 +78,7 @@ def setup_required_join():
     c = callbacks.required_join
     e = events.RequiredJoin
     e.entry(c.menu)
-    e.select_channel(c.ask_post)
+    e.add_channel(c.ask_post)
     e.channel_post(c.save)
-    e.disable(c.disable)
+    e.show(c.show)
+    e.delete_channel(c.delete)

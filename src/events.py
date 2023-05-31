@@ -70,6 +70,7 @@ class Broadcast:
 
 class RequiredJoin:
     entry = dp.button(b.required_join)
-    disable = dp.button(b.disable)
-    select_channel = dp.button(b.select_channel)
+    add_channel = dp.button(b.add_channel)
     channel_post = dp.message().state(RequiredJoinState.post)
+    delete_channel = dp.button(b.DELETE_REQUIRED_JOIN)
+    show = dp.button(b.show_channels)

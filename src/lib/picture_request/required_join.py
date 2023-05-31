@@ -1,6 +1,6 @@
 from botty import Chat, TelegramAPIError, bot, is_private
 
-from api import get_required_join_chat
+import api
 
 
 class RequiredJoin:
@@ -8,21 +8,23 @@ class RequiredJoin:
         self._chat = chat
         self._user_id = user_id
 
-    async def get_chat_id(self) -> int | None:
+    async def get_joins(self) -> list[api.RequiredJoin]:
         if not is_private(self._chat):
-            return None
+            return []
 
-        if not (chat_id := get_required_join_chat()):
-            return None
+        if not (joins := api.RequiredJoin.find_all()):
+            return []
 
-        if not await self._joined(chat_id):
-            return chat_id
-        return None
+        if not await self._joined(joins):
+            return joins
+        return []
 
-    async def _joined(self, chat_id: int) -> bool:
+    async def _joined(self, joins: list[api.RequiredJoin]) -> bool:
         try:
-            chat_member = await bot.get_chat_member(chat_id, self._user_id)
+            for j in joins:
+                chat_member = await bot.get_chat_member(j.chat_id, self._user_id)
+                if not chat_member.is_chat_member():
+                    return False
         except TelegramAPIError:
             return False
-
-        return chat_member.is_chat_member()
+        return True

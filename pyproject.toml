@@ -15,7 +15,13 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 
 [tool.pdm.dev-dependencies]
-dev = ["pytest>=7.3.1", "pytest-cov>=4.0.0"]
+dev = [
+    "pytest>=7.3.1",
+    "pytest-cov>=4.0.0",
+    "pyrogram>=2.0.106",
+    "tgcrypto>=1.2.5",
+    "pytest-asyncio>=0.21.0",
+]
 
 [tool.pdm.scripts]
 start = "python src"
@@ -23,6 +29,7 @@ dev = "python src"
 
 [tool.ruff]
 src = ["src", "tests"]
+exclude = ["*snapshots.py"]
 select = ["ALL"]
 ignore = [
     "F401",
@@ -36,6 +43,7 @@ ignore = [
     "ANN102",
     "ANN206",
     "ANN205",
+    "DTZ001",
 ]
 line-length = 99
 

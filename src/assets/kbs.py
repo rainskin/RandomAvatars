@@ -16,11 +16,7 @@ def sign_menu(sign_id: str):
     return ik(b.delete_sign(sign_id))
 
 
-def required_join(*, disabled: bool = False):
-    buttons = [b.select_channel, b.back]
-    if not disabled:
-        buttons.insert(1, b.disable)
-    return ik(*buttons)
+required_join = ik(b.add_channel, b.show_channels, b.back)
 
 
 def start_from_group(group_id: int):
@@ -32,6 +28,15 @@ def select_picture(*, with_send: bool = False):
     if with_send:
         kb.add(b.send)
     return kb
+
+
+def delete_required_join(chat_id: int):
+    return ik(b.delete_required_join(chat_id))
+
+
+def join_required(links: list[str]):
+    buttons = [b.required_join_link(index+1, link) for index, link in enumerate(links)]
+    return ik(*buttons)
 
 
 picture_menu = rk(b.get_another, b.menu, row_width=2)

@@ -50,18 +50,6 @@ def save_chat(chat_id: int, utm: str | None = None):
     db.save_chat(chat_id, utm or None)
 
 
-def get_required_join_chat() -> int:
-    return db.get_required_join_chat()
-
-
-def set_required_join_chat(chat_id: int | None):
-    db.set_required_join_chat(chat_id)
-
-
-def reset_required_join():
-    set_required_join_chat(None)
-
-
 def get_utm():
     counter: dict[str, int] = {}
     for c in db.get_chats():

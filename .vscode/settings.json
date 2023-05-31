@@ -14,7 +14,9 @@
     ".venv": true,
     ".coverage": true,
     ".pdm-python": true,
-    "pdm.lock": true
+    "pdm.lock": true,
+    "tests\\userbot.session": true,
+    "tests\\userbot.session-journal": true
   },
   "workspace.isHidden": true
 }

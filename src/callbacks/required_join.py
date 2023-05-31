@@ -1,19 +1,16 @@
 from botty import FSMContext, Message, Query, TelegramAPIError, e, obtain_invite_link, r
 
-from api import get_required_join_chat, reset_required_join, set_required_join_chat
-from assets import RequiredJoinState, answers
+from api import RequiredJoin
+from assets import RequiredJoinState, answers, texts
 
 
 async def menu(query: Query):
-    invite_link = None
-    if chat_id := get_required_join_chat():
-        invite_link = await obtain_invite_link(chat_id)
-    await e(query, answers.required_join(invite_link))
+    await e(query, answers.required_join)
 
 
-def disable(query: Query):
-    reset_required_join()
-    return e(query, answers.REQUIRED_JOIN)
+async def delete(query: Query, button: dict[str, int]):
+    RequiredJoin.remove(button["id"])
+    await query.message.delete()
 
 
 async def ask_post(query: Query):
@@ -27,10 +24,18 @@ async def save(msg: Message, state: FSMContext):
         await r(msg, answers.forward_error)
         return
     try:
-        invite_link = await obtain_invite_link(channel.id)
+        link = await obtain_invite_link(channel.id)
     except TelegramAPIError:
         await r(msg, answers.rights_error)
         return
     await state.finish()
-    set_required_join_chat(channel.id)
-    await r(msg, answers.required_join(invite_link))
+    RequiredJoin.add(channel.id, link)
+    await r(msg, answers.required_join)
+
+
+async def show(query: Query):
+    if not (join := RequiredJoin.find_all()):
+        await query.answer(texts.no_required_join)
+        return
+    for j in join:
+        await r(query, answers.required_join_chat(j.chat_id, j.link))
