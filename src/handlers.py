@@ -8,6 +8,7 @@ def setup():
     setup_get_commands()
     setup_menu()
     setup_admin()
+    events.RequiredJoin.check(callbacks.required_join.check)
     events.text(callbacks.check_triggers)
     events.send_photo_error(callbacks.ask_rights)  # type: ignore[TODO]
 

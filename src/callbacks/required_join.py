@@ -2,6 +2,7 @@ from botty import FSMContext, Message, Query, TelegramAPIError, e, obtain_invite
 
 from api import RequiredJoin
 from assets import RequiredJoinState, answers, texts
+from lib import get_required_joins
 
 
 async def menu(query: Query):
@@ -39,3 +40,10 @@ async def show(query: Query):
         return
     for j in join:
         await r(query, answers.required_join_chat(j.chat_id, j.link))
+
+
+async def check(query: Query):
+    if await get_required_joins(query.message.chat, query.from_user.id):
+        await query.answer(texts.required_join_check_failed)
+    else:
+        await e(query, answers.required_join_checked)

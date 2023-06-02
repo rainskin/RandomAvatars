@@ -1,4 +1,4 @@
-from botty import Message, User, r
+from botty import Chat, Message, User, r
 
 import api
 from api import get_cooldown, get_picture
@@ -12,6 +12,10 @@ from .response import Response
 def on_picture_request(msg: Message, category: PictureCategory):
     request = PictureRequest(msg.from_user, msg)
     return request.respond(category)
+
+
+def get_required_joins(chat: Chat, user_id: int):
+    return RequiredJoin(chat, user_id).get_joins()
 
 
 class PictureRequest:
@@ -35,7 +39,7 @@ class PictureRequest:
 
     async def fetch_picture(self, category: PictureCategory):
         save_chat(self._message)
-        if joins := await RequiredJoin(self._chat, self._user_id).get_joins():
+        if joins := await get_required_joins(self._chat, self._user_id):
             await self._ask_to_join_chats(joins)
             return False
         if cooldown := get_cooldown(self._user_id, self._chat.type):

@@ -43,3 +43,4 @@ def required_join_link(num: int, link: str):
 
 
 send = CallbackButton("▶️ Отправить")
+check_join = CallbackButton("✅ Я подписался")

@@ -35,8 +35,10 @@ def delete_required_join(chat_id: int):
 
 
 def join_required(links: list[str]):
-    buttons = [b.required_join_link(index+1, link) for index, link in enumerate(links)]
-    return ik(*buttons)
+    buttons = [
+        b.required_join_link(index + 1, link) for index, link in enumerate(links)
+    ]
+    return ik(*buttons, b.check_join)
 
 
 picture_menu = rk(b.get_another, b.menu, row_width=2)

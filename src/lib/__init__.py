@@ -6,7 +6,7 @@ from botty import TelegramAPIError, bot
 from assets import ADMIN_COMMANDS, ADMIN_IDS, USER_COMMANDS
 
 from .helpers import is_admin, pick_category, save_chat
-from .picture_request import PictureRequest, on_picture_request
+from .picture_request import PictureRequest, get_required_joins, on_picture_request
 
 __all__ = (
     "is_admin",
@@ -14,6 +14,7 @@ __all__ = (
     "pick_category",
     "on_picture_request",
     "PictureRequest",
+    "get_required_joins",
 )
 
 

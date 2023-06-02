@@ -74,3 +74,4 @@ class RequiredJoin:
     channel_post = dp.message().state(RequiredJoinState.post)
     delete_channel = dp.button(b.DELETE_REQUIRED_JOIN)
     show = dp.button(b.show_channels)
+    check = dp.button(b.check_join)

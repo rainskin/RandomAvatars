@@ -74,3 +74,6 @@ required_join = Answer(t.admin_panel, k.required_join)
 
 def reselect_picture(picture: str):
     return Answer(t.select_another_picture, k.select_picture(with_send=True), picture)
+
+
+required_join_checked = Answer(t.required_join_checked)

@@ -39,3 +39,5 @@ select-another-picture = Выбрать другую картинку?
 picture-for = {$recipient}, {$from_user} отправил тебе картинку
 picture-sent = Готово! Сообщение отправлено в группу {$url}
 no-required-join = Обязательная подписка не настроена
+required-join-checked = Спасибо! Теперь можешь снова запросить картинку
+required-join-check-failed = Кажется, ты подписался не на все каналы
