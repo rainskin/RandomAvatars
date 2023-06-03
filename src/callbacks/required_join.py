@@ -44,6 +44,6 @@ async def show(query: Query):
 
 async def check(query: Query):
     if await get_required_joins(query.message.chat, query.from_user.id):
-        await query.answer(texts.required_join_check_failed)
+        await query.answer(texts.required_join_check_failed, show_alert=True)
     else:
         await e(query, answers.required_join_checked)
