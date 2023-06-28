@@ -16,7 +16,8 @@
     ".pdm-python": true,
     "pdm.lock": true,
     "tests\\userbot.session": true,
-    "tests\\userbot.session-journal": true
+    "tests\\userbot.session-journal": true,
+    ".idea": true
   },
   "workspace.isHidden": true
 }

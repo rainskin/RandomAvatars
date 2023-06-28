@@ -1,4 +1,4 @@
-from botty import FSMContext, Message, Query, TelegramAPIError, e, obtain_invite_link, r
+from botty import FSMContext, Message, Query, TelegramAPIError, bot, e, r
 
 from api import RequiredJoin
 from assets import RequiredJoinState, answers, texts
@@ -25,7 +25,7 @@ async def save(msg: Message, state: FSMContext):
         await r(msg, answers.forward_error)
         return
     try:
-        link = await obtain_invite_link(channel.id)
+        link = await _create_invite_link(channel.id)
     except TelegramAPIError:
         await r(msg, answers.rights_error)
         return
@@ -47,3 +47,9 @@ async def check(query: Query):
         await query.answer(texts.required_join_check_failed, show_alert=True)
     else:
         await e(query, answers.required_join_checked)
+
+
+async def _create_invite_link(chat_id: int) -> str:
+    chat = await bot.get_chat(chat_id)
+    link = await chat.create_invite_link()
+    return link.invite_link
