@@ -10,7 +10,8 @@ def connect(
     timeout: int = 3,
 ) -> None:
     if password and user is None:
-        user = "choch"
+        user = "root"
+    print(f'{db}:{host}:{port}:{user}:{password}')
     me.connect(
         db=db,
         host=host,
@@ -18,4 +19,5 @@ def connect(
         password=password,
         port=port,
         serverSelectionTimeoutMS=timeout * 1000,
+        authentication_source='admin'
     )
